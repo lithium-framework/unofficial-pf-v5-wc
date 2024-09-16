@@ -37,6 +37,8 @@ export class PfButton extends WebComponent{
       this.isDisabled = newValue == "true" || newValue == "" ? true : false;
     }
 
+    super.attributeChangedCallback( name , oldValue , newValue );
+
   }
 
 }
