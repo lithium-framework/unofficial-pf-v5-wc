@@ -1,5 +1,10 @@
+
+
 declare module 'bundle-text:*.css' {
-  const content: string;
+  const content: string & {
+    [key: string]: string;
+    [Symbol.toPrimitive](hint: 'default' | 'string' | 'number'): string;
+  };
   export default content;
 }
 

@@ -1,7 +1,7 @@
 import { html , WebComponent , customElement , attr , attrState , state, css } from '@lithium-framework/core';
 
 import { BaseStyle } from '../../css/base';
-import ButtonStyles from 'bundle-text:@patternfly/react-styles/css/components/Button/button.css';
+import * as ButtonStyles from 'bundle-text:@patternfly/react-styles/css/components/Button/button.css';
 
 @customElement({
   name : 'pf-button',
@@ -13,13 +13,14 @@ import ButtonStyles from 'bundle-text:@patternfly/react-styles/css/components/Bu
         `${button.kind ? `pf-m-${button.kind}` : ``}`,
         `${ !button.isDisabled ? `` : button.isDisabled || button.isDisabled == true ? `pf-m-aria-disabled` : `` }`
       ].join(' ')}
+      part = "controller"
       type="button">
         <slot></slot>
       </button>`
   }}`,
   styles : [ 
     BaseStyle,
-    css`${ButtonStyles}` 
+    css`${String(ButtonStyles)}`,
   ],
   shadowOptions: { mode: 'open' }
 })
