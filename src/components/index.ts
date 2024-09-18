@@ -1,5 +1,7 @@
 import './button';
-import './checkbox';
+import './bagde';
+import './action-list';
 
 export * from './button';
-export * from './checkbox';
+export * from './bagde';
+export * from './action-list';

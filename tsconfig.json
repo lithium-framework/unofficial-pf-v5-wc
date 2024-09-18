@@ -1,10 +1,7 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
-    "target": "ESNext",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib" : [ "ES2016" , "DOM" ],
-    "moduleResolution": "Node"
+    "lib" : [ "ES2016" , "DOM" ]
   }
 }
