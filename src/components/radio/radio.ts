@@ -2,8 +2,6 @@ import { html , render , WebComponent , customElement , attr , attrState , state
 //import { BaseStyle } from '../../css/base';
 //import * as ButtonStyles from 'bundle-text:@patternfly/react-styles/css/components/Button/button.css';
 
-console.log("jfeoz")
-
 @customElement({
     name: 'pf-radiobox',
     template: html`${(radio:PfRadio) => {
@@ -26,8 +24,8 @@ export class PfRadio extends WebComponent{
 
 
     @attrState() label: string = "";
-    @attrState() description: string;
-    @attrState() text: string | ViewTemplate;
+    @attrState() description: string = "";
+    @attrState() text: string | ViewTemplate = "";
 
     // Getter/Setter pour "basic"
     @attrState()
@@ -134,39 +132,39 @@ export class PfRadio extends WebComponent{
             `;
         }
 
-        if (this.disabled === "true") {
-            return html`
-                <div class="pf-v5-c-radio" id="radio-disabled-example">
-                    <input
-                        class="pf-v5-c-radio__input"
-                        type="radio"
-                        id="radio-disabled-example-input"
-                        name="radio-disabled-example-input"
-                        disabled
-                    />
-                    <label
-                        class="pf-v5-c-radio__label pf-m-disabled"
-                        for="radio-disabled-example-input"
-                    >Radio disabled</label>
-                </div>
-                ${this.checked === "true" ? html`
-                <div class="pf-v5-c-radio" id="radio-disabled-checked-example">
-                    <input
-                        class="pf-v5-c-radio__input"
-                        type="radio"
-                        id="radio-disabled-checked-example-input"
-                        name="radio-disabled-checked-example-input"
-                        checked
-                        disabled
-                    />
-                    <label
-                        class="pf-v5-c-radio__label pf-m-disabled"
-                        for="radio-disabled-checked-example-input"
-                    >Radio disabled checked</label>
-                </div>
-                ` : null}
-            `;
-        }
+        // if (this.disabled === "true") {
+        //     return html`
+        //         <div class="pf-v5-c-radio" id="radio-disabled-example">
+        //             <input
+        //                 class="pf-v5-c-radio__input"
+        //                 type="radio"
+        //                 id="radio-disabled-example-input"
+        //                 name="radio-disabled-example-input"
+        //                 disabled
+        //             />
+        //             <label
+        //                 class="pf-v5-c-radio__label pf-m-disabled"
+        //                 for="radio-disabled-example-input"
+        //             >Radio disabled</label>
+        //         </div>
+        //         ${this.checked === "true" ? html`
+        //         <div class="pf-v5-c-radio" id="radio-disabled-checked-example">
+        //             <input
+        //                 class="pf-v5-c-radio__input"
+        //                 type="radio"
+        //                 id="radio-disabled-checked-example-input"
+        //                 name="radio-disabled-checked-example-input"
+        //                 checked
+        //                 disabled
+        //             />
+        //             <label
+        //                 class="pf-v5-c-radio__label pf-m-disabled"
+        //                 for="radio-disabled-checked-example-input"
+        //             >Radio disabled checked</label>
+        //         </div>
+        //         ` : null}
+        //     `;
+        // }
 
         // Rendu pour le radio avec description
         if (this.description === "true") {
@@ -222,10 +220,6 @@ export class PfRadio extends WebComponent{
                 ?required=${this.required === "true"}
                 ?disabled=${this._disabled === "true"}
             />
-            <label class="pf-v5-c-radio__label" for="radio-basic-example-input">
-                ${this.label}
-                ${this._required === "true" ? html`<span class="pf-v5-c-check__label-required" aria-hidden="true">*</span>` : null}
-            </label>
         `;
     }
 }

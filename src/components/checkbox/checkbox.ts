@@ -80,42 +80,40 @@ export class PfCheckbox extends WebComponent {
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
     
     if(name == "required"){
-      if( !this.attributes[name] )this.isRequired = false;
+      if( !this.attributes[name as unknown as number] )this.isRequired = false;
       else if(!newValue|| newValue == "true")this.isRequired = true;
       else this.isRequired = false;
     }
 
     if(name == "checked"){
-      if( !this.attributes[name] )this.isChecked = false;
+      if( !this.attributes[name as unknown as number] )this.isChecked = false;
       else if(!newValue|| newValue == "true")this.isChecked = true;
       else this.isChecked = false;
     }
 
     if(name == "disabled"){
-      if( !this.attributes[name] )this.isDisabled = false;
+      if( !this.attributes[name as unknown as number] )this.isDisabled = false;
       else if(!newValue|| newValue == "true")this.isDisabled = true;
       else this.isDisabled = false;
     }
 
     if(name == "description"){
-      if( !this.attributes[name] )this.isDescription = false;
+      if( !this.attributes[name as unknown as number] )this.isDescription = false;
       else if(!newValue|| newValue == "true")this.isDescription = true;
       else this.isDescription = false;
     }
 
     if(name == "body"){
-      if( !this.attributes[name] )this.isBody = false;
+      if( !this.attributes[name as unknown as number] )this.isBody = false;
       else if(!newValue|| newValue == "true")this.isBody = true;
       else this.isBody = false;
     }
 
     if( name == "reverse" ){
-      if( !this.attributes[name] )this.isReversed = false;
+      if( !this.attributes[name as unknown as number] )this.isReversed = false;
       else if(!newValue|| newValue == "true")this.isReversed = true;
       else this.isReversed = false;
     }
-
-    super.attributeChangedCallback( name , oldValue , newValue );
   }
 
 }

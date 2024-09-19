@@ -1,7 +1,7 @@
 import { css, customElement , html, WebComponent } from '@lithium-framework/core';
 import { BaseStyle } from '../../css/base';
 
-import * as ActionListStyle from 'bundle-text:@patternfly/react-styles/css/components/ActionList/action-list.css';
+import ActionListStyle from '@patternfly/react-styles/css/components/ActionList/action-list.css';
 
 @customElement({
   name : 'pf-action-list-item',
@@ -58,3 +58,5 @@ export class PfActionList extends WebComponent{
 
 
 } 
+
+export { ActionListStyle };

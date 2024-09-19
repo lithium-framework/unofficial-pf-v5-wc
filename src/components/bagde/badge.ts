@@ -1,7 +1,7 @@
 import { html , WebComponent , customElement , attr , attrState , state, css } from '@lithium-framework/core';
 import { BaseStyle } from '../../css/base';
 
-import * as BadgeStyle from 'bundle-text:@patternfly/react-styles/css/components/Badge/badge.css'
+import BadgeStyle from '@patternfly/react-styles/css/components/Badge/badge.css'
 
 @customElement({
   name : 'pf-badge',
@@ -22,9 +22,9 @@ import * as BadgeStyle from 'bundle-text:@patternfly/react-styles/css/components
 })
 export class PfBadge extends WebComponent{
 
-  @attr readed : "true" | "false" = null;
+  @attr readed : "true" | "false" | null = null;
 
-  @state isRead = null;
+  @state isRead = false;
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
 
@@ -37,3 +37,5 @@ export class PfBadge extends WebComponent{
   }
 
 }
+
+export { BadgeStyle };

@@ -1,7 +1,7 @@
 import { html , WebComponent , customElement , attr , attrState , state, css } from '@lithium-framework/core';
 
 import { BaseStyle } from '../../css/base';
-import * as ButtonStyles from 'bundle-text:@patternfly/react-styles/css/components/Button/button.css';
+import ButtonStyles from '@patternfly/react-styles/css/components/Button/button.css';
 
 @customElement({
   name : 'pf-button',
@@ -27,8 +27,8 @@ import * as ButtonStyles from 'bundle-text:@patternfly/react-styles/css/componen
 export class PfButton extends WebComponent{
 
   @attrState() variant: "primary" | "secondary" | "tertiary" = "primary";
-  @attrState() kind: "warning" | "danger";
-  @attrState() disabled:"false" | "true" = null;
+  @attrState() kind: "warning" | "danger" | null = null;
+  @attrState() disabled:"false" | "true" | null = null;
   
   @state isDisabled = false;
 
@@ -43,3 +43,5 @@ export class PfButton extends WebComponent{
   }
 
 }
+
+export { ButtonStyles };
