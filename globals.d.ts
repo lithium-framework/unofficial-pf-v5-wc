@@ -1,6 +1,6 @@
 
 
-declare module 'bundle-text:*.css' {
+declare module '*.css' {
   const content: string & {
     [key: string]: string;
     [Symbol.toPrimitive](hint: 'default' | 'string' | 'number'): string;

@@ -2,33 +2,47 @@
   "name": "unofficial-pf-v5-wc",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
-  "module": "dist/module.js",
-  "types": "dist/types.d.ts",
-  "source": "src/index.ts",
+  "main": "out/bundle.js",
   "scripts": {
-    "pre-build": "rm -rf .parcel-cache ; rm -rf /dist ;",
-    "build": "npm run pre-build && parcel build --target main",
-    "watch": "npm run pre-build && parcel watch --target main"
+    "build": "webpack",
+    "dev": "webpack --watch"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@lithium-framework/core": "^1.7.0",
+    "@lithium-framework/core": "file:../../Lithium/core",
     "@patternfly/react-core": "^5.4.0",
-    "@patternfly/react-styles": "^5.4.0",
-    "@swc/helpers": "^0.5.13",
-    "parcel": "^2.12.0"
+    "@patternfly/react-styles": "^5.4.0"
   },
   "devDependencies": {
+    "@parcel/optimizer-cssnano": "^2.12.0",
     "@parcel/packager-ts": "^2.12.0",
     "@parcel/transformer-inline-string": "^2.12.0",
     "@parcel/transformer-typescript-types": "^2.12.0",
-    "typescript": "^5.6.2"
+    "css-loader": "^7.1.2",
+    "raw-loader": "^4.0.2",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.2",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4"
   },
   "targets": {
-    "main": {
-      "context": "browser"
+    "module": {
+      "context": "browser",
+      "isLibrary": true,
+      "outputFormat": "esmodule",
+      "distDir": "./dist/module",
+      "sourceMap": false,
+      "optimize": true
+    },
+    "commonjs": {
+      "context": "browser",
+      "isLibrary": true,
+      "outputFormat": "commonjs",
+      "distDir": "./dist/cjs",
+      "sourceMap": false,
+      "optimize": true
     }
   }
 }

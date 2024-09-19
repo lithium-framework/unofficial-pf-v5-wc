@@ -26,8 +26,8 @@ export class PfCheckbox extends WebComponent {
 
 
     @attrState() label: string = "";
-    @attrState() description: string;
-    @attrState() text: string | ViewTemplate;
+    @attrState() description: string = "";
+    @attrState() text: string | ViewTemplate = "";
 
     // Getter/Setter pour "basic"
     @attrState()
@@ -270,10 +270,6 @@ export class PfCheckbox extends WebComponent {
                 ?required=${this.required === "true"}
                 ?disabled=${this.disabled === "true"}
             />
-            <label class="pf-v5-c-check__label" for="checkbox-example">
-                ${this.label}
-                ${this._required === "true" ? html`<span class="pf-v5-c-check__label-required" aria-hidden="true">*</span>` : null}
-            </label>
         `;
     }
 }
