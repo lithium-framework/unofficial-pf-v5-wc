@@ -3,6 +3,7 @@ import './bagde';
 import './action-list';
 import './checkbox';
 import './radio';
+import './menu-toggle';
 
 export { PfButton , ButtonStyles } from './button/button';
 export { PfBadge , BadgeStyle } from './bagde/badge';
