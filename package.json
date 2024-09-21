@@ -8,8 +8,8 @@
   "source": "src/index.ts",
   "scripts": {
     "pre-build": "rm -rf .parcel-cache ; rm -rf /dist ;",
-    "build": "npm run pre-build && parcel build --target main",
-    "watch": "npm run pre-build && parcel watch --target main"
+    "build": "parcel build --target main --no-cache",
+    "watch": "parcel watch --target main --no-cache"
   },
   "author": "",
   "license": "ISC",
