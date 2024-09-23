@@ -2,6 +2,7 @@ import { html , WebComponent , customElement , attr , attrState , state, css } f
 
 import { BaseStyle } from '../../css/base';
 import ButtonStyles from '@patternfly/react-styles/css/components/Button/button.css';
+import { PfWebComponent } from '../../models/PfWebComponent';
 
 @customElement({
   name : 'pf-button',
@@ -24,7 +25,7 @@ import ButtonStyles from '@patternfly/react-styles/css/components/Button/button.
   ],
   shadowOptions: { mode: 'open' }
 })
-export class PfButton extends WebComponent{
+export class PfButton extends PfWebComponent{
 
   @attrState() variant: "primary" | "secondary" | "tertiary" = "primary";
   @attrState() kind: "warning" | "danger" | null = null;
@@ -33,9 +34,27 @@ export class PfButton extends WebComponent{
   @state isDisabled = false;
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
+
+    let isAttribute = this.attributes[name as unknown as number] ? true : false;
+    let isValue = newValue ? true : false;
     
     if( name == 'disabled' ){
-      this.isDisabled = newValue == "true" || newValue == "" ? true : false;
+
+      console.log({ name , oldValue , newValue , isAttribute , isValue })
+      
+      // this.isDisabled = newValue == "true" || newValue == "" ? true : false;
+      if( !isAttribute )this["isDisabled"] = false;
+      else if( isAttribute ){
+
+        if(newValue == 'true')this.isDisabled = true;
+        else if(newValue == '')this.isDisabled = true;
+        else if( !newValue )this.isDisabled = true;
+        else this.isDisabled = false;
+
+      }
+      // else if(!newValue || newValue == "true" || newValue == "")(this as any)["isDisabled"] = true;
+      // else if( newValue == "false" )(this as any)["isDisabled"] = false;
+      // else (this as any)["isDisabled"] = false;
     }
 
     super.attributeChangedCallback( name , oldValue , newValue );
