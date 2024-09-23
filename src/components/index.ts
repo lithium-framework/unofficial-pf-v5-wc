@@ -3,6 +3,7 @@ import './bagde';
 import './action-list';
 import './checkbox';
 import './radio';
+import './menu';
 import './menu-toggle';
 import './panel';
 
