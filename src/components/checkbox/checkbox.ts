@@ -1,11 +1,10 @@
 import { html , render , WebComponent , customElement , attr , attrState , state, css, ViewTemplate } from '@lithium-framework/core';
 import { BaseStyle } from '../../css/base';
-import * as CheckboxStyles from 'bundle-text:@patternfly/react-styles/css/components/Check/check.css';
+import CheckboxStyles from '@patternfly/react-styles/css/components/Check/check.css';
 
 @customElement({
     name: 'pf-checkbox',
     template: html`${(checkbox: PfCheckbox) => {
-        console.log(checkbox.isDisabled)
       return html`
         <div 
           class=${[
