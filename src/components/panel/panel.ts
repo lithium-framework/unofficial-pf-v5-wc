@@ -48,7 +48,7 @@ import { PfWebComponent } from '../../models/PfWebComponent';
     css`${String(PanelStyles)}`,
     css`
       pf-v5-c-panel pf-m-raised{
-        background-color: red;
+       
       }
     `
   ]
