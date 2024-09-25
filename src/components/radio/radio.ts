@@ -24,18 +24,14 @@ import { PfWebComponent } from '../../models/PfWebComponent';
             ${
                 radio.isDescription ? 
                 html`<span class="pf-v5-c-radio__description">
-                    <slot name="description">
-                        <p>Little description here</p>
-                    </slot>
+                    <slot name="description"></slot>
                 </span>` : 
                 html``
             }
             ${
                 radio.isBody ? 
                 html`<span class="pf-v5-c-radio__body">
-                    <slot name="body">
-                        <p>Little body here</p>
-                    </slot>
+                    <slot name="body"></slot>
                 </span>` : 
                 html``
             }
