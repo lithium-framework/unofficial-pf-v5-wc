@@ -18,7 +18,8 @@ import BadgeStyle from '@patternfly/react-styles/css/components/Badge/badge.css'
   styles : [
     BaseStyle,
     css`${String(BadgeStyle)}`
-  ]
+  ],
+  shadowOptions: { mode: 'open' }
 })
 export class PfBadge extends WebComponent{
 

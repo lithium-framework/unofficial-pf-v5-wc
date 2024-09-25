@@ -1,6 +1,6 @@
 import { css } from '@lithium-framework/core';
 
-export const BaseStyle = css`
+export const BaseStyle:any = css`
   :host{
     display: inline-block;
     contain: content;

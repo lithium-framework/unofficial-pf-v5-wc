@@ -5,20 +5,23 @@
   "main": "out/bundle.js",
   "scripts": {
     "build": "webpack",
-    "dev": "webpack --watch"
+    "dev": "webpack --watch",
+    "extract-api": "api-extractor run --local",
+    "generate-docs": "api-documenter markdown -i ./temp -o ./docs",
+    "clean-docs": "node scripts/format-documentation.js",
+    "build:doc": "npm run extract-api && npm run generate-docs && npm run clean-docs"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@lithium-framework/core": "^1.7.0",
+    "@lithium-framework/core": "file:../../Lithium/core",
     "@patternfly/react-core": "^5.4.0",
-    "@patternfly/react-styles": "^5.4.0"
+    "@patternfly/react-styles": "^5.4.0",
+    "unofficial-pf-v5-wc-icons": "file:../unofficial-pf-v5-wc-icons"
   },
   "devDependencies": {
-    "@parcel/optimizer-cssnano": "^2.12.0",
-    "@parcel/packager-ts": "^2.12.0",
-    "@parcel/transformer-inline-string": "^2.12.0",
-    "@parcel/transformer-typescript-types": "^2.12.0",
+    "@microsoft/api-documenter": "^7.25.14",
+    "@microsoft/api-extractor": "^7.47.9",
     "css-loader": "^7.1.2",
     "raw-loader": "^4.0.2",
     "style-loader": "^4.0.0",
@@ -27,22 +30,7 @@
     "webpack": "^5.94.0",
     "webpack-cli": "^5.1.4"
   },
-  "targets": {
-    "module": {
-      "context": "browser",
-      "isLibrary": true,
-      "outputFormat": "esmodule",
-      "distDir": "./dist/module",
-      "sourceMap": false,
-      "optimize": true
-    },
-    "commonjs": {
-      "context": "browser",
-      "isLibrary": true,
-      "outputFormat": "commonjs",
-      "distDir": "./dist/cjs",
-      "sourceMap": false,
-      "optimize": true
-    }
-  }
+  "files": [
+    "out"
+  ]
 }
