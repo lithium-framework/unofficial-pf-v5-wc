@@ -1,6 +1,7 @@
 import { html , render , WebComponent , customElement , attr , attrState , state, css, ViewTemplate } from '@lithium-framework/core';
 import { BaseStyle } from '../../css/base';
 import CheckboxStyles from '@patternfly/react-styles/css/components/Check/check.css';
+import { PfWebComponent } from '../../models/PfWebComponent';
 
 @customElement({
     name: 'pf-checkbox',
@@ -29,18 +30,14 @@ import CheckboxStyles from '@patternfly/react-styles/css/components/Check/check.
           ${
             checkbox.isDescription ?
             html`<span class="pf-v5-c-check__description">
-              <slot name = "description">
-                <p>Little description here</p>
-              </slot>
+              <slot name = "description"></slot>
             </span>` : 
             html``
           }
           ${
             checkbox.isBody ?
             html`<span class="pf-v5-c-check__body">
-              <slot name = "body">
-                <p>Little body here</p>
-              </slot>
+              <slot name = "body"></slot>
             </span>` : 
             html``
           }
@@ -64,7 +61,7 @@ import CheckboxStyles from '@patternfly/react-styles/css/components/Check/check.
     shadowOptions: { mode: 'open' }
 })
 
-export class PfCheckbox extends WebComponent {
+export class PfCheckbox extends PfWebComponent {
 
   @attr disabled : "true" | "false" | null = null;
   @attr checked : "true" | "false" | null = null;
@@ -81,42 +78,14 @@ export class PfCheckbox extends WebComponent {
   @state isBody:boolean = false;
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
-    
-    if(name == "required"){
-      if( !this.attributes[name as unknown as number] )this.isRequired = false;
-      else if(!newValue|| newValue == "true")this.isRequired = true;
-      else this.isRequired = false;
-    }
+    if( name == "disabled")this.isDisabled = this.handleBooleanAttribute(name, newValue);
+    if( name == "checked")this.isChecked = this.handleBooleanAttribute(name, newValue);
+    if( name == "required")this.isRequired = this.handleBooleanAttribute(name, newValue);
+    if( name == "reverse")this.isReversed = this.handleBooleanAttribute(name, newValue);
+    if( name == "description")this.isDescription = this.handleBooleanAttribute(name, newValue);
+    if( name == "body")this.isBody = this.handleBooleanAttribute(name, newValue);
 
-    if(name == "checked"){
-      if( !this.attributes[name as unknown as number] )this.isChecked = false;
-      else if(!newValue|| newValue == "true")this.isChecked = true;
-      else this.isChecked = false;
-    }
-
-    if(name == "disabled"){
-      if( !this.attributes[name as unknown as number] )this.isDisabled = false;
-      else if(!newValue|| newValue == "true")this.isDisabled = true;
-      else this.isDisabled = false;
-    }
-
-    if(name == "description"){
-      if( !this.attributes[name as unknown as number] )this.isDescription = false;
-      else if(!newValue|| newValue == "true")this.isDescription = true;
-      else this.isDescription = false;
-    }
-
-    if(name == "body"){
-      if( !this.attributes[name as unknown as number] )this.isBody = false;
-      else if(!newValue|| newValue == "true")this.isBody = true;
-      else this.isBody = false;
-    }
-
-    if( name == "reverse" ){
-      if( !this.attributes[name as unknown as number] )this.isReversed = false;
-      else if(!newValue|| newValue == "true")this.isReversed = true;
-      else this.isReversed = false;
-    }
+    super.attributeChangedCallback( name , oldValue , newValue );
   }
 
 }
