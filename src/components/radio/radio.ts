@@ -23,14 +23,18 @@ import * as RadioStyles from '@patternfly/react-styles/css/components/Radio/radi
             ${
                 radio.isDescription ? 
                 html`<span class="pf-v5-c-radio__description">
-                    <slot name="description"></slot>
+                    <slot name="description">
+                        <p>Little description here</p>
+                    </slot>
                 </span>` : 
                 html``
             }
             ${
                 radio.isBody ? 
                 html`<span class="pf-v5-c-radio__body">
-                    <slot name="body"></slot>
+                    <slot name="body">
+                        <p>Little body here</p>
+                    </slot>
                 </span>` : 
                 html``
             }
