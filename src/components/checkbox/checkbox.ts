@@ -30,18 +30,14 @@ import { PfWebComponent } from '../../models/PfWebComponent';
           ${
             checkbox.isDescription ?
             html`<span class="pf-v5-c-check__description">
-              <slot name = "description">
-                <p>Little description here</p>
-              </slot>
+              <slot name = "description"></slot>
             </span>` : 
             html``
           }
           ${
             checkbox.isBody ?
             html`<span class="pf-v5-c-check__body">
-              <slot name = "body">
-                <p>Little body here</p>
-              </slot>
+              <slot name = "body"></slot>
             </span>` : 
             html``
           }
