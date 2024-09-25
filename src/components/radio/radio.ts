@@ -1,6 +1,7 @@
 import { html , render , WebComponent , customElement , attr , attrState , state, css, ViewTemplate} from '@lithium-framework/core';
 import { BaseStyle } from '../../css/base';
 import * as RadioStyles from '@patternfly/react-styles/css/components/Radio/radio.css';
+import { PfWebComponent } from '../../models/PfWebComponent';
 
 @customElement({
     name: 'pf-radiobox',
@@ -62,7 +63,7 @@ import * as RadioStyles from '@patternfly/react-styles/css/components/Radio/radi
     ]
 })
 
-export class PfRadio extends WebComponent{
+export class PfRadio extends PfWebComponent{
     @attr disabled: "true" | "false" | null = null;
     @attr checked: "true" | "false" | null = null;
     @attr reverse: "true" | "false" | null = null;
@@ -75,42 +76,14 @@ export class PfRadio extends WebComponent{
     @state isDescription:boolean = false;
     @state isBody:boolean = false;
     
-    attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
-        
-        // looking on change attribute 'disabled' //
-        if(name === 'disabled'){
-            if(!this.attributes[name as unknown as number]){this.isDisabled = false;}
-            else if(!newValue || newValue === "true"){this.isDisabled = true;}
-            else this.isDisabled = false;
-        }
-
-        // looking on change attribute 'checked' //
-        if(name === 'checked'){
-            if(!this.attributes[name as unknown as number]){this.isChecked = false;}
-            else if(!newValue || newValue === "true"){this.isChecked = true;}
-            else this.isChecked = false;
-        }
-
-        // looking on change attribute 'reversed' //
-        if(name === 'reverse'){
-            if(!this.attributes[name as unknown as number]){this.isReversed = false;}
-            else if(!newValue || newValue === "true"){this.isReversed = true;}
-            else this.isReversed = false;
-        }
-
-        // looking on change attribute 'description' //
-        if(name === 'description'){
-            if(!this.attributes[name as unknown as number]){this.isDescription = false;}
-            else if(!newValue || newValue === "true"){this.isDescription = true;}
-            else this.isDescription = false;
-        }
-
-        // looking on change attribute 'body' //
-        if(name === 'body'){
-            if(!this.attributes[name as unknown as number]){this.isBody = false;}
-            else if(!newValue || newValue === "true"){this.isBody = true;}
-            else this.isBody = false;
-        }
+    attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
+        if( name == "disabled")this.isDisabled = this.handleBooleanAttribute(name, newValue);
+        if( name == "checked")this.isChecked = this.handleBooleanAttribute(name, newValue);
+        if( name == "reverse")this.isReversed = this.handleBooleanAttribute(name, newValue);
+        if( name == "description")this.isDescription = this.handleBooleanAttribute(name, newValue);
+        if( name == "body")this.isBody = this.handleBooleanAttribute(name, newValue);
+    
+        super.attributeChangedCallback( name , oldValue , newValue );
     }
 }
 
