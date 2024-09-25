@@ -6,6 +6,8 @@ import './radio';
 import './menu';
 import './menu-toggle';
 import './panel';
+import './divider';
+import './menu-dropdown';
 
 export { PfButton , ButtonStyles } from './button/button';
 export { PfBadge , BadgeStyle } from './bagde/badge';
@@ -14,3 +16,5 @@ export { PfRadio } from './radio/radio';
 export { PfCheckbox } from './checkbox/checkbox';
 export { PfMenuToggle , MenuToggleStyles } from './menu-toggle/menu-toggle';
 export { PfPanel } from './panel/panel';
+export { PfDivider , DividerStyles } from './divider/divider';
+export { PfDropDown , PfDropDownMenu , PfDropDownMenuItem } from './menu-dropdown';
