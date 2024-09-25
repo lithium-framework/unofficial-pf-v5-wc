@@ -1,4 +1,4 @@
-import { html, WebComponent , customElement, css, ViewTemplate , state, attr } from "@lithium-framework/core";
+import { html, WebComponent , customElement, css, ViewTemplate , state, attr , ref , createRef } from "@lithium-framework/core";
 
 import MenuToggleStyles from '@patternfly/react-styles/css/components/MenuToggle/menu-toggle.css';
 import IconStyles from '@patternfly/react-styles/css/components/Icon/icon.css';
@@ -9,61 +9,148 @@ import { PfWebComponent } from "../../models/PfWebComponent";
   name : 'pf-menu-toggle',
   template: html`${( menuToggle:PfMenuToggle ) => {
 
-    return html`<button class=${[
+    return html`<button ${ ref( menuToggle.$_controller ) } class=${[
       "pf-v5-c-menu-toggle",
-      menuToggle.isExpanded ? "pf-m-expanded" : ""
-    ].join(' ')} ?disabled = ${menuToggle.isDisabled} type="button" aria-expanded=${ String(menuToggle.isExpanded) }>
-      <span class="pf-v5-c-menu-toggle__icon">
-        <i class="fas fa-cog" aria-hidden="true">
+      menuToggle.isExpanded ? "pf-m-expanded" : null,
+      menuToggle.isPrimary ? "pf-m-primary" : null,
+      menuToggle.isSecondary ? "pf-m-secondary" : null,
+      menuToggle.isPlain ? "pf-m-plain" : null,
+    ].filter( x => x ).join(' ')} ?disabled = ${menuToggle.isDisabled} type="button" aria-expanded=${ String(menuToggle.isExpanded) }>
+      ${
+        menuToggle.isIcon ?
+        html`<span class="pf-v5-c-menu-toggle__icon">
           <span class="pf-v5-c-icon">
             <span class="pf-v5-c-icon__content">
-              <i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i>
+              <slot name = "icon" onSlotChange=${ menuToggle.cretateOnSlotChangeHandler( "icon" ) }></slot>
             </span>
           </span>
-        </i>
-      </span>
+        </span>` :
+        html``
+      }
       <span class="pf-v5-c-menu-toggle__text">
-        <slot></slot>
+        <slot
+          onSlotChange=${ menuToggle.cretateOnSlotChangeHandler( null , ( node ) => {
+            if( node )menuToggle.isText = true;
+            else menuToggle.isText = false;
+          } ) }
+        ></slot>
       </span>
-      <span class="pf-v5-c-menu-toggle__controls">
-        <span class="pf-v5-c-menu-toggle__toggle-icon">
-          <i class="fas fa-caret-down" aria-hidden="true"></i>
-          ${
-            menuToggle.badge ?
-            html `<pf-badge>
-              <slot name = "badge" ></slot>
-            </pf-badge>` :
-            html``
-          }
-        </span>
-      </span>
+      ${
+        menuToggle.badge ?
+        html `<span class="pf-v5-c-menu-toggle__count">
+          <pf-badge>
+            <slot 
+              name = "badge" 
+              onSlotChange=${ menuToggle.cretateOnSlotChangeHandler( "badge" , ( nodes ) => {
+
+              } ) }>
+            </slot>
+          </pf-badge>
+        </span>` :
+        html``
+      }
+      ${
+        menuToggle.isPlain ?
+        menuToggle.isText ?
+        html`<span class="pf-v5-c-menu-toggle__controls">
+          <span class="pf-v5-c-menu-toggle__toggle-icon">
+            <pf-icons-caret-down></pf-icons-caret-down>
+          </span>
+        </span>`:
+        html`` :
+        html`<span class="pf-v5-c-menu-toggle__controls">
+          <span class="pf-v5-c-menu-toggle__toggle-icon">
+            <pf-icons-caret-down></pf-icons-caret-down>
+          </span>
+        </span>`
+      }
     </button>`
 
   }}`,
   styles : [
     BaseStyle,
     css`${MenuToggleStyles}`,
-    css`${IconStyles}`
+    css`${IconStyles}`,
+    css`
+      pf-icons-caret-down{
+        display: flex;
+        align-items: center;
+      }
+
+      .pf-v5-c-menu-toggle.pf-m-plain{
+        display: inline-flex !important;
+      }
+    `
   ],
   shadowOptions: { mode: 'open' }
 })
 export class PfMenuToggle extends PfWebComponent{
 
   @attr() badge : "true" | "false" | null = null;
+  @attr() icon : "true" | "false" | null = null;
   @attr() expanded : "true" | "false" | null = null;
   @attr() disabled : "true" | "false" | null = null;
 
+  @attr() primary : "true" | "false" | null = null;
+  @attr() secondary : "true" | "false" | null = null;
+  @attr() plain : "true" | "false" | null = null;
+
   @state isBadge : boolean = false;
+  @state isIcon : boolean = false;
   @state isExpanded : boolean = false;
   @state isDisabled : boolean = false;
+  @state isText : boolean = false;
+
+  @state isPrimary = false;
+  @state isSecondary = false;
+  @state isPlain = false;
+
+  $_controller = createRef< HTMLButtonElement >();
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
 
     if( name == "badge" )this.isBadge = this.handleBooleanAttribute( name , newValue );
+    if( name == "icon" )this.isIcon = this.handleBooleanAttribute( name , newValue );
     if( name == "expanded" )this.isExpanded = this.handleBooleanAttribute( name , newValue );
     if( name == "disabled" )this.isDisabled = this.handleBooleanAttribute( name , newValue );
+
+    if( name == "primary" ){
+      this.isPrimary = this.handleBooleanAttribute( name , newValue );
+      if(this.isPrimary && this.isSecondary)this.removeAttribute('secondary');
+      if(this.isPrimary && this.isPlain)this.removeAttribute('plain');
+    }
+    if( name == "secondary" ){
+      this.isSecondary = this.handleBooleanAttribute( name , newValue );
+      if(this.isSecondary && this.isPrimary)this.removeAttribute('primary');
+      if(this.isSecondary && this.isPlain)this.removeAttribute('plain');
+    }
+    if( name == "plain" ){
+      this.isPlain = this.handleBooleanAttribute( name , newValue );
+      if(this.isSecondary && this.isPrimary)this.removeAttribute('primary');
+      if(this.isSecondary && this.isSecondary)this.removeAttribute('secondary');
+    }
     
     super.attributeChangedCallback( name , oldValue , newValue );
+
+  }
+
+  cretateOnSlotChangeHandler( slotName: null | string = null , callback?:( node : HTMLElement | null ) => void ){
+
+    return ( target:PfMenuToggle ) => {
+      let childrens = target.childNodes;
+
+      let [children] = [...(target.childNodes as unknown as HTMLElement[])].map(( element ) => {
+        /// ## Aucun slot
+        if( !slotName && element.getAttribute('slot') == null )return element;
+        /// ## Avec slot + correspondance
+        else if( slotName && element.getAttribute('slot') == slotName )return element;
+        /// ### Sinon return null
+        else return null;
+      }).filter( x => x )
+
+      if( callback )callback( children );
+
+    }
 
   }
 
