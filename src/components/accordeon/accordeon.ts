@@ -22,7 +22,7 @@ const factory = () => {
             aria-expanded="${accordeon.isExpanded ? 'true' : 'false'}"
           >
             <span class="pf-v5-c-accordion__toggle-text">Item one</span>
-            <pf-icons-chevron-right></pf-icons-chevron-right>
+            ${accordeon.isExpanded ? html`<pf-icons-chevron-down></pf-icons-chevron-down>` : html`<pf-icons-chevron-right></pf-icons-chevron-right>`}
           </button>
         </h3>
         <div class="pf-v5-c-accordion__expandable-content ${accordeon.isExpanded ? 'pf-m-expanded' : ''}" ?hidden="${!accordeon.isExpanded}">
