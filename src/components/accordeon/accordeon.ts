@@ -22,7 +22,10 @@ const factory = () => {
             aria-expanded="${accordeon.isExpanded ? 'true' : 'false'}"
           >
             <span class="pf-v5-c-accordion__toggle-text">Item one</span>
-            ${accordeon.isExpanded ? html`<pf-icons-chevron-down></pf-icons-chevron-down>` : html`<pf-icons-chevron-right></pf-icons-chevron-right>`}
+            ${accordeon.isExpanded ? 
+              html`<pf-icons-chevron-down></pf-icons-chevron-down>` : 
+              html`<pf-icons-chevron-right></pf-icons-chevron-right>`
+            }
           </button>
         </h3>
         <div class="pf-v5-c-accordion__expandable-content ${accordeon.isExpanded ? 'pf-m-expanded' : ''}" ?hidden="${!accordeon.isExpanded}">
@@ -43,6 +46,14 @@ const factory = () => {
       h3 {
         padding: 0;
         margin: 0;
+      }
+      .pf-v5-c-accordion__toggle{
+        align-items: center !important;
+        justify-content: space-between !important;
+      }
+      .pf-v5-c-accordion__toggle-text{
+        text-overflow: inherit !important;
+        width: 6rem !important;
       }
     `
   ],
