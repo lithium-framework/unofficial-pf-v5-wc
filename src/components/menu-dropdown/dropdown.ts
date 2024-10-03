@@ -52,9 +52,9 @@ export class PfDropDownMenuItem extends PfWebComponent{
   @attr "area-disabled" : "true" | "false" | null = null;
   @attr link : "string" | null = null;
 
-  @state isDisabled = false;
-  @state isAreaDisabled = false;
-  @state isLink = false;
+  @state() isDisabled = false;
+  @state() isAreaDisabled = false;
+  @state() isLink = false;
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
 
@@ -92,11 +92,11 @@ export class PfDropDownMenuItem extends PfWebComponent{
 })
 export class PfDropDownMenu extends PfWebComponent{
 
-  @state direction : "up" | "down" = "down";
-  @state maxWidth : string = "";
-  @state minWidth : string = "";
-  @state position : 'right' | 'left' | 'center' | 'start' | 'end' = "center";
-  @state width : string = "";
+  @state() direction : "up" | "down" = "down";
+  @state() maxWidth : string = "";
+  @state() minWidth : string = "";
+  @state() position : 'right' | 'left' | 'center' | 'start' | 'end' = "center";
+  @state() width : string = "";
 
 }
 
@@ -178,14 +178,14 @@ export class PfDropDown extends PfWebComponent{
   @attr() expanded : "true" | "false" | null = null;
   @attr() plain : "true" | "false" | null = null;
 
-  @state isExpanded = false;
-  @state isPlain = false;
+  @state() isExpanded = false;
+  @state() isPlain = false;
 
-  @state direction : "up" | "down" = "down";
-  @state maxWidth : string = "";
-  @state minWidth : string = "";
-  @state position : 'right' | 'left' | 'center' | 'start' | 'end' = "center";
-  @state width : string = "";
+  @state() direction : "up" | "down" = "down";
+  @state() maxWidth : string = "";
+  @state() minWidth : string = "";
+  @state() position : 'right' | 'left' | 'center' | 'start' | 'end' = "center";
+  @state() width : string = "";
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
 

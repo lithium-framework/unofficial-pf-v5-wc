@@ -73,12 +73,12 @@ export class PfCheckbox extends WebComponent {
   @attr description : "true" | "false" | null = null;
   @attr body : "true" | "false" | null = null;
 
-  @state isDisabled:boolean = false;
-  @state isChecked:boolean = false;
-  @state isRequired:boolean = false;
-  @state isReversed:boolean = false;
-  @state isDescription:boolean = false;
-  @state isBody:boolean = false;
+  @state() isDisabled:boolean = false;
+  @state() isChecked:boolean = false;
+  @state() isRequired:boolean = false;
+  @state() isReversed:boolean = false;
+  @state() isDescription:boolean = false;
+  @state() isBody:boolean = false;
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
     

@@ -120,10 +120,10 @@ export class PfMenuItem extends PfWebComponent{
   @attr link : "string" | null = null;
   @attr danger : "true" | "false" | null = null;
 
-  @state isDisabled = false;
-  @state isAreaDisabled = false;
-  @state isLink = false;
-  @state isDanger = false;
+  @state() isDisabled = false;
+  @state() isAreaDisabled = false;
+  @state() isLink = false;
+  @state() isDanger = false;
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
 
@@ -165,7 +165,7 @@ export class PfMenu extends PfWebComponent{
 
   @attr scrollable : "true" | "false" | null = null;
 
-  @state isScrollable = false;
+  @state() isScrollable = false;
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
 

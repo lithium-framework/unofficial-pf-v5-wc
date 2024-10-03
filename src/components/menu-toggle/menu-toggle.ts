@@ -102,15 +102,15 @@ export class PfMenuToggle extends PfWebComponent{
   @attr() secondary : "true" | "false" | null = null;
   @attr() plain : "true" | "false" | null = null;
 
-  @state isBadge : boolean = false;
-  @state isIcon : boolean = false;
-  @state isExpanded : boolean = false;
-  @state isDisabled : boolean = false;
-  @state isText : boolean = false;
+  @state() isBadge : boolean = false;
+  @state() isIcon : boolean = false;
+  @state() isExpanded : boolean = false;
+  @state() isDisabled : boolean = false;
+  @state() isText : boolean = false;
 
-  @state isPrimary = false;
-  @state isSecondary = false;
-  @state isPlain = false;
+  @state() isPrimary = false;
+  @state() isSecondary = false;
+  @state() isPlain = false;
 
   $_controller = createRef< HTMLButtonElement >();
 

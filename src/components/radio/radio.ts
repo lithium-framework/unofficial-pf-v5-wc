@@ -63,17 +63,17 @@ import * as RadioStyles from '@patternfly/react-styles/css/components/Radio/radi
 })
 
 export class PfRadio extends WebComponent{
-    @attr disabled: "true" | "false" | null = null;
-    @attr checked: "true" | "false" | null = null;
-    @attr reverse: "true" | "false" | null = null;
-    @attr body: "true" | "false" | null = null;
-    @attr description: "true" | "false" | null = null;
+    @attr() disabled: "true" | "false" | null = null;
+    @attr() checked: "true" | "false" | null = null;
+    @attr() reverse: "true" | "false" | null = null;
+    @attr() body: "true" | "false" | null = null;
+    @attr() description: "true" | "false" | null = null;
 
-    @state isDisabled:boolean = false;
-    @state isChecked:boolean = false;
-    @state isReversed:boolean = false;
-    @state isDescription:boolean = false;
-    @state isBody:boolean = false;
+    @state() isDisabled:boolean = false;
+    @state() isChecked:boolean = false;
+    @state() isReversed:boolean = false;
+    @state() isDescription:boolean = false;
+    @state() isBody:boolean = false;
     
     attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null) {
         
