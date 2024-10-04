@@ -64,7 +64,7 @@ export class PfAccordeon extends PfWebComponent {
 
   @attr expanded: "true" | "false" | null = null;
 
-  @state isExpanded: boolean = false;
+  @state() isExpanded: boolean = false;
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
     if (name === "expanded") this.isExpanded = this.handleBooleanAttribute(name, newValue);
