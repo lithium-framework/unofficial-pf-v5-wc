@@ -49,12 +49,12 @@ import  'unofficial-pf-v5-wc-icons';
 })
 export class PfMasthead extends PfWebComponent{
 
-  @attr 'mixed-content': "true" | "false" | null = null;
-  @attr 'display-inline': "true" | "false" | null = null;
-  @attr 'display-stack': "true" | "false" | null = null;
-  @attr 'responsive': "true" | "false" | null = null;
-  @attr 'light': "true" | "false" | null = null;
-  @attr 'insets': "true" | "false" | null = null;
+  @attr() 'mixed-content': "true" | "false" | null = null;
+  @attr() 'display-inline': "true" | "false" | null = null;
+  @attr() 'display-stack': "true" | "false" | null = null;
+  @attr() 'responsive': "true" | "false" | null = null;
+  @attr() 'light': "true" | "false" | null = null;
+  @attr() 'insets': "true" | "false" | null = null;
 
   @state isMixedContent:boolean = false;
   @state isDisplayInline:boolean = false;
