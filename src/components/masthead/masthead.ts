@@ -56,12 +56,12 @@ export class PfMasthead extends PfWebComponent{
   @attr() 'light': "true" | "false" | null = null;
   @attr() 'insets': "true" | "false" | null = null;
 
-  @state isMixedContent:boolean = false;
-  @state isDisplayInline:boolean = false;
-  @state isDisplayStack:boolean = false;
-  @state isResponsive:boolean = false;
-  @state isLight:boolean = false;
-  @state isInsets:boolean = false;
+  @state() isMixedContent:boolean = false;
+  @state() isDisplayInline:boolean = false;
+  @state() isDisplayStack:boolean = false;
+  @state() isResponsive:boolean = false;
+  @state() isLight:boolean = false;
+  @state() isInsets:boolean = false;
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
     if( name == "mixed-content")this.isMixedContent = this.handleBooleanAttribute(name, newValue);
