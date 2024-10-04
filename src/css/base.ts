@@ -2,7 +2,7 @@ import { css } from '@lithium-framework/core';
 
 export const BaseStyle:any = css`
   :host{
-    display: inline-block;
+    display: block;
     contain: content;
   }
 

@@ -25,7 +25,7 @@ export class PfBadge extends WebComponent{
 
   @attr readed : "true" | "false" | null = null;
 
-  @state isRead = false;
+  @state() isRead = false;
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
 

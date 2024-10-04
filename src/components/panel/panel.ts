@@ -66,12 +66,12 @@ export class PfPanel extends PfWebComponent{
   @attr() bordered: "true" | "false" | null = null;
   @attr() scrollable: "true" | "false" | null = null;
 
-  @state isHeader:boolean = false;
-  @state isFooter:boolean = false;
-  @state isNoBody:boolean = false;
-  @state isRaised:boolean = false;
-  @state isBordered:boolean = false;
-  @state isScrollable:boolean = false;
+  @state() isHeader:boolean = false;
+  @state() isFooter:boolean = false;
+  @state() isNoBody:boolean = false;
+  @state() isRaised:boolean = false;
+  @state() isBordered:boolean = false;
+  @state() isScrollable:boolean = false;
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
     if( name == "header")this.isHeader = this.handleBooleanAttribute(name, newValue);
