@@ -14,10 +14,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@lithium-framework/core": "^1.8.0",
+    "@lithium-framework/core": "^1.8.5-0",
     "@patternfly/react-core": "^5.4.0",
     "@patternfly/react-styles": "^5.4.0",
-    "latest": "^0.2.0",
     "unofficial-pf-v5-wc-icons": "file:../unofficial-pf-v5-wc-icons"
   },
   "devDependencies": {

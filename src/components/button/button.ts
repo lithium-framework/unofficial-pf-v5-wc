@@ -7,17 +7,35 @@ import { PfWebComponent } from '../../models/PfWebComponent';
 @customElement({
   name : 'pf-button',
   template : html`${( button:PfButton ) => {
+
+    let variant = button.isPrimary ? 
+    "primary" :
+    button.isSecondary ?
+    "secondary" :
+    button.isTertiary ?
+    "tertiary" :
+    "primary";
+
+    let kind = button.isWarning ? 
+    "warning" :
+    button.isDanger ?
+    "danger" :
+    null;
+
     return html`<button 
       class=${[
         'pf-v5-c-button',
-        `pf-m-${button.variant}`,
-        `${button.kind ? `pf-m-${button.kind}` : ``}`,
-        `${ !button.isDisabled ? `` : button.isDisabled || button.isDisabled == true ? `pf-m-aria-disabled` : `` }`
-      ].join(' ')}
+        `pf-m-${variant}`,
+        kind ? `pf-m-${kind}` : null,
+        !button.isDisabled ? `` : button.isDisabled || button.isDisabled == true ? `pf-m-aria-disabled` : null
+      ].filter( x => x ).join(' ')}
       part = "controller"
-      type="button">
+      type="button"
+      @mousedown = ${ () => (button.onmousedown as any)()() }
+      >
         <slot></slot>
-      </button>`
+      </button>`;
+
   }}`,
   styles : [ 
     BaseStyle,
@@ -27,35 +45,50 @@ import { PfWebComponent } from '../../models/PfWebComponent';
 })
 export class PfButton extends PfWebComponent{
 
-  @attrState() variant: "primary" | "secondary" | "tertiary" = "primary";
-  @attrState() kind: "warning" | "danger" | null = null;
-  @attrState() disabled:"false" | "true" | null = null;
+  @attr primary : "true" | "false" | null = null;
+  @attr secondary : "true" | "false" | null = null;
+  @attr tertiary : "true" | "false" | null = null;
+  @attr warning : "true" | "false" | null = null;
+  @attr danger : "true" | "false" | null = null;
+  @attr disabled : "true" | "false" | null = null;
   
-  @state isDisabled = false;
+  @state() isPrimary = false;
+  @state() isSecondary = false;
+  @state() isTertiary = false;
+  @state() isWarning = false;
+  @state() isDanger = false;
+  @state() isDisabled = false;
+
+  connectedCallback(): void {
+    super.connectedCallback();
+  }
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
 
-    let isAttribute = this.attributes[name as unknown as number] ? true : false;
-    let isValue = newValue ? true : false;
-    
-    if( name == 'disabled' ){
-
-      console.log({ name , oldValue , newValue , isAttribute , isValue })
-      
-      // this.isDisabled = newValue == "true" || newValue == "" ? true : false;
-      if( !isAttribute )this["isDisabled"] = false;
-      else if( isAttribute ){
-
-        if(newValue == 'true')this.isDisabled = true;
-        else if(newValue == '')this.isDisabled = true;
-        else if( !newValue )this.isDisabled = true;
-        else this.isDisabled = false;
-
-      }
-      // else if(!newValue || newValue == "true" || newValue == "")(this as any)["isDisabled"] = true;
-      // else if( newValue == "false" )(this as any)["isDisabled"] = false;
-      // else (this as any)["isDisabled"] = false;
+    if( name == "primary" ){
+      this.isPrimary = this.handleBooleanAttribute( name , newValue );
+      if(this.isSecondary)this.removeAttribute('secondary');
+      if(this.isTertiary)this.removeAttribute('tertiary');
     }
+    if( name == "secondary" ){
+      this.isSecondary = this.handleBooleanAttribute( name , newValue );
+      if(this.isPrimary)this.removeAttribute('primary');
+      if(this.isTertiary)this.removeAttribute('tertiary');
+    }
+    if( name == "tertiary" ){
+      this.isTertiary = this.handleBooleanAttribute( name , newValue );
+      if(this.isPrimary)this.removeAttribute('primary');
+      if(this.isSecondary)this.removeAttribute('secondary');
+    }
+    if( name == "warning" ){
+      this.isWarning = this.handleBooleanAttribute( name , newValue );
+      if(this.isDanger)this.removeAttribute('danger');
+    }
+    if( name == "danger" ){
+      this.isDanger = this.handleBooleanAttribute( name , newValue );
+      if(this.isWarning)this.removeAttribute('warning');
+    }
+    if( name == "disabled" )this.isDisabled = this.handleBooleanAttribute( name , newValue );
 
     super.attributeChangedCallback( name , oldValue , newValue );
 

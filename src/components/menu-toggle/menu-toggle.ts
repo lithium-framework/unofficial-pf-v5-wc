@@ -57,7 +57,9 @@ import { PfWebComponent } from "../../models/PfWebComponent";
             <pf-icons-caret-down></pf-icons-caret-down>
           </span>
         </span>`:
-        html`` :
+        html`<span class="pf-v5-c-menu-toggle__controls">
+          <span class="pf-v5-c-menu-toggle__toggle-icon"></span>
+        </span>` :
         html`<span class="pf-v5-c-menu-toggle__controls">
           <span class="pf-v5-c-menu-toggle__toggle-icon">
             <pf-icons-caret-down></pf-icons-caret-down>
@@ -80,6 +82,11 @@ import { PfWebComponent } from "../../models/PfWebComponent";
       .pf-v5-c-menu-toggle.pf-m-plain{
         display: inline-flex !important;
       }
+
+      .pf-v5-c-menu-toggle__toggle-icon{
+        min-width : 16px;
+        aspect-ratio: 1/1;
+      }
     `
   ],
   shadowOptions: { mode: 'open' }
@@ -95,15 +102,15 @@ export class PfMenuToggle extends PfWebComponent{
   @attr() secondary : "true" | "false" | null = null;
   @attr() plain : "true" | "false" | null = null;
 
-  @state isBadge : boolean = false;
-  @state isIcon : boolean = false;
-  @state isExpanded : boolean = false;
-  @state isDisabled : boolean = false;
-  @state isText : boolean = false;
+  @state() isBadge : boolean = false;
+  @state() isIcon : boolean = false;
+  @state() isExpanded : boolean = false;
+  @state() isDisabled : boolean = false;
+  @state() isText : boolean = false;
 
-  @state isPrimary = false;
-  @state isSecondary = false;
-  @state isPlain = false;
+  @state() isPrimary = false;
+  @state() isSecondary = false;
+  @state() isPlain = false;
 
   $_controller = createRef< HTMLButtonElement >();
 
@@ -131,26 +138,6 @@ export class PfMenuToggle extends PfWebComponent{
     }
     
     super.attributeChangedCallback( name , oldValue , newValue );
-
-  }
-
-  cretateOnSlotChangeHandler( slotName: null | string = null , callback?:( node : HTMLElement | null ) => void ){
-
-    return ( target:PfMenuToggle ) => {
-      let childrens = target.childNodes;
-
-      let [children] = [...(target.childNodes as unknown as HTMLElement[])].map(( element ) => {
-        /// ## Aucun slot
-        if( !slotName && element.getAttribute('slot') == null )return element;
-        /// ## Avec slot + correspondance
-        else if( slotName && element.getAttribute('slot') == slotName )return element;
-        /// ### Sinon return null
-        else return null;
-      }).filter( x => x )
-
-      if( callback )callback( children );
-
-    }
 
   }
 
