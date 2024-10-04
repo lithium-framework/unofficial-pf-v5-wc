@@ -21,12 +21,12 @@ export class PfAvatar extends PfWebComponent{
   @attr() large: "true" | "false" | null = null;
   @attr() extra: "true" | "false" | null = null;
 
-  @state isBorderedLight:boolean = false;
-  @state isBorderedDark:boolean = false;
-  @state isSmall:boolean = false;
-  @state isMedium:boolean = false;
-  @state isLarge:boolean = false;
-  @state isExtra:boolean = false;
+  @state() isBorderedLight:boolean = false;
+  @state() isBorderedDark:boolean = false;
+  @state() isSmall:boolean = false;
+  @state() isMedium:boolean = false;
+  @state() isLarge:boolean = false;
+  @state() isExtra:boolean = false;
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
     console.log(name)
