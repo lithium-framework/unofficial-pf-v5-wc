@@ -55,11 +55,11 @@ export class PfAlert extends PfWebComponent{
   @attr() warning: "true" | "false" | null = null;
   @attr() danger: "true" | "false" | null = null;
 
-  @state isCustom:boolean = false;
-  @state isInfo:boolean = false;
-  @state isSuccess:boolean = false;
-  @state isWarning:boolean = false;
-  @state isDanger:boolean = false;
+  @state() isCustom:boolean = false;
+  @state() isInfo:boolean = false;
+  @state() isSuccess:boolean = false;
+  @state() isWarning:boolean = false;
+  @state() isDanger:boolean = false;
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
     if( name == "custom")this.isCustom = this.handleBooleanAttribute(name, newValue);
