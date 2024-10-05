@@ -101,6 +101,11 @@ export const drawerTemplate = html`${( drawer : PfDrawer ) => {
   template : drawerTemplate,
   styles : [
     BaseStyle,
+    css`
+      :host{
+        display : flex;
+      }
+    `,
     css`${DrawerStyles}`,
   ]
 })
@@ -148,7 +153,7 @@ export class PfDrawer extends PfWebComponent{
   }
 
   onResize(target: PfDrawer, { event }: { event: MouseEvent }) {
-    
+
     // Récupère la référence du panneau et du conteneur parent
     const panel = target.shadowRoot?.querySelector('.pf-v5-c-drawer__panel') as HTMLElement;
     const mainContainer = target.shadowRoot?.querySelector('.pf-v5-c-drawer__main') as HTMLElement;
@@ -190,20 +195,12 @@ export class PfDrawer extends PfWebComponent{
       else if (target.isPanelRight) {
         // Calculer le delta de redimensionnement pour le panneau à droite
         let resizeDelta = deltaMousePosition - initialPanelSize; // Différence par rapport à la taille initiale
-        let translateX = initialTranslateX + initialPanelSize; // Nouvelle position X à appliquer
-        let finalValue = translateX + resizeDelta; // Valeur finale après redimensionnement
-  
-        // Appliquer le transform seulement si la valeur finale est dans la limite
-        if (finalValue > -initialPanelSize) panel.style.transform = `translateX(${finalValue}px)`;
+        panel.setAttribute( 'style' , `--pf-v5-c-drawer__panel--md--FlexBasis : ${-resizeDelta}px; --pf-v5-c-drawer__panel--md--FlexBasis--min : ${"150px"}; width : var(--pf-v5-c-drawer__panel--md--FlexBasis)` );
       }
       else if (target.isPanelLeft) {
         // Calculer le delta de redimensionnement pour le panneau à gauche
-        let resizeDelta = deltaMousePosition - initialPanelSize; // Différence par rapport à la taille initiale
-        let translateX = initialTranslateX - initialPanelSize; // Nouvelle position X à appliquer (négatif pour aller à gauche)
-        let finalValue = translateX + resizeDelta; // Valeur finale après redimensionnement
-  
-        // Appliquer le transform seulement si la valeur finale est dans la limite
-        if (finalValue < initialPanelSize) panel.style.transform = `translateX(${finalValue}px)`;
+        let resizeDelta = deltaMousePosition + initialPanelSize; // Différence par rapport à la taille initiale
+        panel.setAttribute( 'style' , `--pf-v5-c-drawer__panel--md--FlexBasis : ${resizeDelta}px; --pf-v5-c-drawer__panel--md--FlexBasis--min : ${"150px"}; width : var(--pf-v5-c-drawer__panel--md--FlexBasis)` );
       }
     };
   
