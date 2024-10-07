@@ -1,6 +1,7 @@
 import './button';
 import './bagde';
 import './drawer';
+import './menu-dropdown';
 import './action-list';
 import './checkbox';
 import './radio';
@@ -20,6 +21,7 @@ export { PfActionList , PfActionListItem , PfActionListGroup , ActionListStyle }
 export { PfRadio } from './radio/radio';
 export { PfCheckbox } from './checkbox/checkbox';
 export { PfMenuToggle , MenuToggleStyles } from './menu-toggle/menu-toggle';
+export { PfDropDown , PfDropDownMenu , PfDropDownMenuItem } from './menu-dropdown/dropdown';
 export { PfPanel } from './panel/panel';
 export { PfAccordeon } from './accordeon/accordeon';
 export { PfAlert } from './alert/alert';
