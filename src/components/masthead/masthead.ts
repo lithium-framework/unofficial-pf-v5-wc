@@ -15,13 +15,7 @@ import  'unofficial-pf-v5-wc-icons';
       masthead.isInsets ? 'pf-m-inset-sm': '',
     ].join(' ')}>
       <span class="pf-v5-c-masthead__toggle">
-        <button
-          class="pf-v5-c-button pf-m-plain"
-          type="button"
-          aria-label="Global navigation"
-        >
           <pf-icons-menu></pf-icons-menu>
-        </button>
       </span>
       <div class="pf-v5-c-masthead__main">
         <a class="pf-v5-c-masthead__brand" href="#">Logo</a>
