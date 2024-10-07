@@ -36,13 +36,13 @@ import  'unofficial-pf-v5-wc-icons';
   styles: [
     css`${String(MastheadStyles)}`,
     css`
-    button.pf-v5-c-button.pf-m-plain {
+    /* button.pf-v5-c-button.pf-m-plain {
       background-color: #151515 !important;
       border: none !important;
     }
     div[name="content"]{
       display: flex !important
-    }
+    } */
     `
   ],
   shadowOptions: { mode: 'open' }
