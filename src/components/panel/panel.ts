@@ -16,7 +16,9 @@ import { PfWebComponent } from '../../models/PfWebComponent';
 
       ${panel.isNoBody ? html`` : html`
         ${panel.isHeader ? html`
-          <div class="pf-v5-c-panel__header">Header content</div>
+          <div class="pf-v5-c-panel__header">
+            <slot name="header"></slot>
+          </div>
           <hr class="pf-v5-c-divider" />
         ` : ''}
 
@@ -26,16 +28,14 @@ import { PfWebComponent } from '../../models/PfWebComponent';
           </div>
         </div>` : ''}
 
-        <div class="pf-v5-c-panel__main"
+        <div class="pf-v5-c-panel__main">
           <div class="pf-v5-c-panel__main-body">
-            Main content
-            <slot name="body"></slot>
+            <slot></slot>
           </div>
         </div>
 
         ${panel.isFooter ? html`
           <div class="pf-v5-c-panel__footer">
-            Footer content
             <slot name="footer"></slot>
           </div>
         ` : ''}`
