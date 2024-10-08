@@ -9,10 +9,11 @@ import  'unofficial-pf-v5-wc-icons';
     return html`
     <div class="pf-v5-c-page">
       <pf-masthead display-inline></pf-masthead>
-      <pf-drawer></pf-drawer>
+      <div class="pf-v5-c-page__sidebar">
+        <pf-drawer inline></pf-drawer>
+      </div>
       <pf-panel></pf-panel>
-    </main>
-</div>`
+    </div>`
   }}`,
   styles : [
     css`${String(PageStyles)}`
