@@ -3,7 +3,6 @@ import { html, WebComponent , customElement, css, ViewTemplate , state, attr , r
 import DropDownStyles from '@patternfly/react-styles/css/components/Dropdown/dropdown.css';
 import { BaseStyle } from "../../css/base";
 import { PfWebComponent } from "../../models/PfWebComponent";
-import { PfMenu } from "../menu/menu";
 
 @customElement({
   name : 'pf-dropdown-menu-item',

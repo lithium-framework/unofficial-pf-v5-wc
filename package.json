@@ -4,12 +4,12 @@
   "description": "",
   "main": "out/bundle.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack && npm run build:doc",
     "dev": "webpack --watch",
     "extract-api": "api-extractor run --local",
     "generate-docs": "api-documenter markdown -i ./temp -o ./docs",
-    "clean-docs": "node scripts/format-documentation.js",
-    "build:doc": "npm run extract-api && npm run generate-docs && npm run clean-docs"
+    "clean-docs": "node scripts/format-documentation.mjs",
+    "build:doc": "rm -rf ./docs && npm run extract-api && npm run generate-docs && npm run clean-docs && rm -rf ./temp "
   },
   "author": "",
   "license": "ISC",

@@ -6,6 +6,7 @@ import { PfWebComponent } from '../../models/PfWebComponent';
 @customElement({
   name: 'pf-panel',
   template: html`${(panel: PfPanel) => {
+
     return html`
       <div class=${[
         "pf-v5-c-panel",
@@ -14,48 +15,55 @@ import { PfWebComponent } from '../../models/PfWebComponent';
         panel.isScrollable ? "pf-m-scrollable" : ""
       ].filter(Boolean).join(' ')}>
 
-        ${panel.isNoBody ? html`` : html`
-
-          ${panel.isHeader ? html`
+        ${
+          panel.isHeader ? 
+          html`
             <div class="pf-v5-c-panel__header">
-              <slot name="header"></slot>
+              <slot name = "header"></slot>
             </div>
             <hr class="pf-v5-c-divider" />
-          ` : ''}
+          ` : 
+          html``
+        }
 
-          <div class="pf-v5-c-panel__main">
-            <div class="pf-v5-c-panel__main-body">
-              <slot></slot>
+        ${
+          !panel.isNoBody ?
+          html`
+            <div class="pf-v5-c-panel__main" tabindex="0">
+              <div class="pf-v5-c-panel__main-body">
+                <slot></slot>
+              </div>
             </div>
-          </div>
+          ` :
+          html``
+        }
 
-          ${panel.isFooter ? html`
+        ${
+          panel.isFooter ? 
+          html`
             <div class="pf-v5-c-panel__footer">
               <slot name="footer"></slot>
             </div>
-          ` : ''}`
+          ` : 
+          html``
         }
 
-        ${panel.isHeader ? html`
-          <div class="pf-v5-c-panel__header">
-            <slot name="header"></slot>
-          </div>
-          <hr class="pf-v5-c-divider" />
-        ` : ''}
-
-        ${panel.isFooter ? html`
-          <div class="pf-v5-c-panel__footer">
-            <slot name="footer"></slot>
-          </div>
-        ` : ''}
-      </div>
-    `;
+    </div>`;
   }}`,
   styles: [
-    BaseStyle,
+    css`${BaseStyle}`,
     css`${String(PanelStyles)}`,
+    css`
+      pf-v5-c-panel pf-m-raised{
+       
+      }
+    `
   ]
 })
+
+
+
+
 
 export class PfPanel extends PfWebComponent{
   @attr() header: "true" | "false" | null = null;
