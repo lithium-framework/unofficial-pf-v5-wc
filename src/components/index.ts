@@ -13,6 +13,7 @@ import './accordeon';
 import './alert';
 import './backtotop';
 import './masthead';
+import './page';
 
 export { PfButton , ButtonStyles } from './button/button';
 export { PfBadge , BadgeStyle } from './bagde/badge';
@@ -28,3 +29,4 @@ export { PfAccordeon } from './accordeon/accordeon';
 export { PfAlert } from './alert/alert';
 export { PfBackToTop } from './backtotop/backtotop';
 export { PfMasthead } from './masthead/masthead';
+export { PfPage } from './page/page';
