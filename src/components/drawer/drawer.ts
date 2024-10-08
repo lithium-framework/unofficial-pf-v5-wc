@@ -101,11 +101,6 @@ export const drawerTemplate = html`${( drawer : PfDrawer ) => {
   template : drawerTemplate,
   styles : [
     BaseStyle,
-    css`
-      :host{
-        display : flex;
-      }
-    `,
     css`${DrawerStyles}`,
   ]
 })
