@@ -12,6 +12,7 @@ import './panel';
 import './accordeon';
 import './alert';
 import './backtotop';
+import './masthead';
 
 export { PfButton , ButtonStyles } from './button/button';
 export { PfBadge , BadgeStyle } from './bagde/badge';
@@ -26,3 +27,4 @@ export { PfPanel } from './panel/panel';
 export { PfAccordeon } from './accordeon/accordeon';
 export { PfAlert } from './alert/alert';
 export { PfBackToTop } from './backtotop/backtotop';
+export { PfMasthead } from './masthead/masthead';
