@@ -15,10 +15,12 @@ import  'unofficial-pf-v5-wc-icons';
       masthead.isInsets ? 'pf-m-inset-sm': '',
     ].join(' ')}>
       <span class="pf-v5-c-masthead__toggle">
-          <pf-icons-menu></pf-icons-menu>
+        <slot name="toggle-icon"></slot>
       </span>
       <div class="pf-v5-c-masthead__main">
-        <a class="pf-v5-c-masthead__brand" href="#">Logo</a>
+        <a class="pf-v5-c-masthead__brand" href="#">
+          <slot name="brand"></slot>
+        </a>
       </div>
       <div class="pf-v5-c-masthead__content">
         <div class="pf-v5-l-flex">
@@ -30,13 +32,32 @@ import  'unofficial-pf-v5-wc-icons';
   styles: [
     css`${String(MastheadStyles)}`,
     css`
-    /* button.pf-v5-c-button.pf-m-plain {
-      background-color: #151515 !important;
-      border: none !important;
+    .pf-v5-c-masthead{
+      padding-right: 20px !important
+    }  
+    .pf-v5-c-masthead__toggle > slot{
+      padding-right: 10px;
+      display: inline-flex;
+      gap: 10px;
     }
-    div[name="content"]{
-      display: flex !important
-    } */
+    .pf-v5-c-masthead__toggle{
+      padding-left: 20px !important;
+    }
+    .pf-v5-c-masthead__brand {
+    display: inline-flex !important;
+    align-self: center !important;
+    text-decoration: none !important;
+    }
+    .pf-v5-c-masthead__content > .pf-v5-l-flex{
+      display: flex;
+      align-items: center;
+    }
+    .pf-v5-c-masthead__content > .pf-v5-l-flex > slot{
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+    }
     `
   ],
   shadowOptions: { mode: 'open' }
