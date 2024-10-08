@@ -14,7 +14,7 @@ import  'unofficial-pf-v5-wc-icons';
       masthead.isLight ? 'pf-m-light': '',
       masthead.isInsets ? 'pf-m-inset-sm': '',
     ].join(' ')}>
-      <span class="pf-v5-c-masthead__toggle">
+      ${masthead.isMixedContent ? html`<span class="pf-v5-c-masthead__toggle">
         <slot name="toggle-icon"></slot>
       </span>
       <div class="pf-v5-c-masthead__main">
@@ -26,7 +26,14 @@ import  'unofficial-pf-v5-wc-icons';
         <div class="pf-v5-l-flex">
           <slot></slot>
         </div>
-      </div>
+      </div>`: html`<span class="pf-v5-c-masthead__toggle">
+        <slot name="toggle-icon"></slot>
+      </span>
+      <div class="pf-v5-c-masthead__main">
+        <a class="pf-v5-c-masthead__brand" href="#">
+          <slot name="brand"></slot>
+        </a>
+      </div>`}
     </header>`
   }}`,
   styles: [
