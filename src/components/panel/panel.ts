@@ -15,18 +15,13 @@ import { PfWebComponent } from '../../models/PfWebComponent';
     ].filter(Boolean).join(' ')}>
 
       ${panel.isNoBody ? html`` : html`
+
         ${panel.isHeader ? html`
           <div class="pf-v5-c-panel__header">
             <slot name="header"></slot>
           </div>
           <hr class="pf-v5-c-divider" />
         ` : ''}
-
-        ${panel.isScrollable ? html`<div class="pf-v5-c-panel__main" tabindex="0">
-          <div class="pf-v5-c-panel__main-body">
-            <slot name="body"></slot>
-          </div>
-        </div>` : ''}
 
         <div class="pf-v5-c-panel__main">
           <div class="pf-v5-c-panel__main-body">
@@ -46,11 +41,6 @@ import { PfWebComponent } from '../../models/PfWebComponent';
   styles: [
     BaseStyle,
     css`${String(PanelStyles)}`,
-    css`
-      pf-v5-c-panel pf-m-raised{
-       
-      }
-    `
   ]
 })
 export class PfPanel extends PfWebComponent{
