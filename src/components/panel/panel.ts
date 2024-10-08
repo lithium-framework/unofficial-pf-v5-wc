@@ -7,14 +7,34 @@ import { PfWebComponent } from '../../models/PfWebComponent';
   name: 'pf-panel',
   template: html`${(panel: PfPanel) => {
     return html`
-    <div class=${[
-      "pf-v5-c-panel",
-      panel.isRaised ? "pf-m-raised" : "",
-      panel.isBordered ? "pf-m-bordered" : "",
-      panel.isScrollable ? "pf-m-scrollable" : ""
-    ].filter(Boolean).join(' ')}>
+      <div class=${[
+        "pf-v5-c-panel",
+        panel.isRaised ? "pf-m-raised" : "",
+        panel.isBordered ? "pf-m-bordered" : "",
+        panel.isScrollable ? "pf-m-scrollable" : ""
+      ].filter(Boolean).join(' ')}>
 
-      ${panel.isNoBody ? html`` : html`
+        ${panel.isNoBody ? html`` : html`
+
+          ${panel.isHeader ? html`
+            <div class="pf-v5-c-panel__header">
+              <slot name="header"></slot>
+            </div>
+            <hr class="pf-v5-c-divider" />
+          ` : ''}
+
+          <div class="pf-v5-c-panel__main">
+            <div class="pf-v5-c-panel__main-body">
+              <slot></slot>
+            </div>
+          </div>
+
+          ${panel.isFooter ? html`
+            <div class="pf-v5-c-panel__footer">
+              <slot name="footer"></slot>
+            </div>
+          ` : ''}`
+        }
 
         ${panel.isHeader ? html`
           <div class="pf-v5-c-panel__header">
@@ -23,26 +43,20 @@ import { PfWebComponent } from '../../models/PfWebComponent';
           <hr class="pf-v5-c-divider" />
         ` : ''}
 
-        <div class="pf-v5-c-panel__main">
-          <div class="pf-v5-c-panel__main-body">
-            <slot></slot>
-          </div>
-        </div>
-
         ${panel.isFooter ? html`
           <div class="pf-v5-c-panel__footer">
             <slot name="footer"></slot>
           </div>
-        ` : ''}`
-      }
-
-    </div>`;
+        ` : ''}
+      </div>
+    `;
   }}`,
   styles: [
     BaseStyle,
     css`${String(PanelStyles)}`,
   ]
 })
+
 export class PfPanel extends PfWebComponent{
   @attr() header: "true" | "false" | null = null;
   @attr() footer: "true" | "false" | null = null;
