@@ -6,40 +6,47 @@ import { PfWebComponent } from '../../models/PfWebComponent';
 @customElement({
   name: 'pf-panel',
   template: html`${(panel: PfPanel) => {
+
     return html`
-    <div class=${[
-      "pf-v5-c-panel",
-      panel.isRaised ? "pf-m-raised" : "",
-      panel.isBordered ? "pf-m-bordered" : "",
-      panel.isScrollable ? "pf-m-scrollable" : ""
-    ].filter(Boolean).join(' ')}>
+      <div class=${[
+        "pf-v5-c-panel",
+        panel.isRaised ? "pf-m-raised" : "",
+        panel.isBordered ? "pf-m-bordered" : "",
+        panel.isScrollable ? "pf-m-scrollable" : ""
+      ].filter(Boolean).join(' ')}>
 
-      ${panel.isNoBody ? html`` : html`
-        ${panel.isHeader ? html`
-          <div class="pf-v5-c-panel__header">Header content</div>
-          <hr class="pf-v5-c-divider" />
-        ` : ''}
+        ${
+          panel.isHeader ? 
+          html`
+            <div class="pf-v5-c-panel__header">
+              <slot name = "header"></slot>
+            </div>
+            <hr class="pf-v5-c-divider" />
+          ` : 
+          html``
+        }
 
-        ${panel.isScrollable ? html`<div class="pf-v5-c-panel__main" tabindex="0">
-          <div class="pf-v5-c-panel__main-body">
-            <slot name="body"></slot>
-          </div>
-        </div>` : ''}
+        ${
+          !panel.isNoBody ?
+          html`
+            <div class="pf-v5-c-panel__main" tabindex="0">
+              <div class="pf-v5-c-panel__main-body">
+                <slot></slot>
+              </div>
+            </div>
+          ` :
+          html``
+        }
 
-        <div class="pf-v5-c-panel__main"
-          <div class="pf-v5-c-panel__main-body">
-            Main content
-            <slot name="body"></slot>
-          </div>
-        </div>
-
-        ${panel.isFooter ? html`
-          <div class="pf-v5-c-panel__footer">
-            Footer content
-            <slot name="footer"></slot>
-          </div>
-        ` : ''}`
-      }
+        ${
+          panel.isFooter ? 
+          html`
+            <div class="pf-v5-c-panel__footer">
+              <slot name="footer"></slot>
+            </div>
+          ` : 
+          html``
+        }
 
     </div>`;
   }}`,
