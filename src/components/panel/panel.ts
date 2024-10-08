@@ -53,11 +53,6 @@ import { PfWebComponent } from '../../models/PfWebComponent';
     `
   ]
 })
-
-
-
-
-
 export class PfPanel extends PfWebComponent{
   @attr() header: "true" | "false" | null = null;
   @attr() footer: "true" | "false" | null = null;
