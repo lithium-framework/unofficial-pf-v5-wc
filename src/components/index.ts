@@ -1,6 +1,7 @@
 import './button';
 import './bagde';
 import './drawer';
+import './divider';
 import './menu-dropdown';
 import './action-list';
 import './checkbox';
@@ -14,6 +15,7 @@ import './backtotop';
 
 export { PfButton , ButtonStyles } from './button/button';
 export { PfBadge , BadgeStyle } from './bagde/badge';
+export { PfDivider , DividerStyles } from './divider/divider';
 export { PfDrawer , DrawerStyles , drawerTemplate } from './drawer/drawer';
 export { PfActionList , PfActionListItem , PfActionListGroup , ActionListStyle } from './action-list/action-list';
 export { PfRadio } from './radio/radio';

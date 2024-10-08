@@ -15,7 +15,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[unofficial-pf-v5-wc](./unofficial-pf-v5-wc.md)
+[unofficial-pf-v5-wc](./unofficial-pf-v5-wc)
 
 
 </td><td>
