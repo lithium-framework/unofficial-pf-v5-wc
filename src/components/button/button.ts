@@ -27,7 +27,8 @@ import { PfWebComponent } from '../../models/PfWebComponent';
         'pf-v5-c-button',
         `pf-m-${variant}`,
         kind ? `pf-m-${kind}` : null,
-        !button.isDisabled ? `` : button.isDisabled || button.isDisabled == true ? `pf-m-aria-disabled` : null
+        !button.isDisabled ? `` : button.isDisabled || button.isDisabled == true ? `pf-m-aria-disabled` : null,
+        button.isLink ? `pf-m-link` : null
       ].filter( x => x ).join(' ')}
       part = "controller"
       type="button"
@@ -51,6 +52,7 @@ export class PfButton extends PfWebComponent{
   @attr warning : "true" | "false" | null = null;
   @attr danger : "true" | "false" | null = null;
   @attr disabled : "true" | "false" | null = null;
+  @attr link : "true" | "false" | null = null;
   
   @state() isPrimary = false;
   @state() isSecondary = false;
@@ -58,6 +60,7 @@ export class PfButton extends PfWebComponent{
   @state() isWarning = false;
   @state() isDanger = false;
   @state() isDisabled = false;
+  @state() isLink = false;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -87,6 +90,9 @@ export class PfButton extends PfWebComponent{
     if( name == "danger" ){
       this.isDanger = this.handleBooleanAttribute( name , newValue );
       if(this.isWarning)this.removeAttribute('warning');
+    }
+    if( name == "link" ){
+      this.isLink = this.handleBooleanAttribute( name , newValue );
     }
     if( name == "disabled" )this.isDisabled = this.handleBooleanAttribute( name , newValue );
 
