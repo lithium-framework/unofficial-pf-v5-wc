@@ -4,28 +4,41 @@ import NavigationStyles from '@patternfly/react-styles/css/components/Nav/nav.cs
 import { PfWebComponent } from '../../models/PfWebComponent';
 
 @customElement({
+  name: 'pf-navigation-list-item',
+  template: html`${(navigationListItem: PfNavigationListItem) => {
+    return html`
+    <li class="pf-v5-c-nav__item">
+      <a href="#" class="pf-v5-c-nav__link">Link</a>
+    </li>
+    `
+  }}`,
+  styles: [
+    BaseStyle
+  ],
+  shadowOptions: { mode: 'open' }
+})
+
+@customElement({
+  name: 'pf-navigation-list',
+  template: html`${(navigationList: PfNavigationList) => {
+    return html`
+    <ul class="pf-v5-c-nav__list" role="list">
+        <slot></slot>
+    </ul>
+    `
+  }}`,
+  styles: [
+    BaseStyle
+  ],
+  shadowOptions: { mode: 'open' }
+})
+
+@customElement({
   name: 'pf-navigation',
   template: html`${(navigation: PfNavigation) => {
     return html`
     <nav class="pf-v5-c-nav" aria-label="Global">
-      <ul class="pf-v5-c-nav__list" role="list">
-        <li class="pf-v5-c-nav__item">
-          <a href="#" class="pf-v5-c-nav__link">Link 1</a>
-        </li>
-        <li class="pf-v5-c-nav__item">
-          <a
-            href="#"
-            class="pf-v5-c-nav__link pf-m-current"
-            aria-current="page"
-          >Current link</a>
-        </li>
-        <li class="pf-v5-c-nav__item">
-          <a href="#" class="pf-v5-c-nav__link">Link 3</a>
-        </li>
-        <li class="pf-v5-c-nav__item">
-          <a href="#" class="pf-v5-c-nav__link">Link 4</a>
-        </li>
-      </ul>
+      <slot></slot>
     </nav>`
   }}`,
   styles: [
@@ -41,5 +54,11 @@ import { PfWebComponent } from '../../models/PfWebComponent';
   shadowOptions: { mode: 'open' }
 })
 export class PfNavigation extends PfWebComponent{
+
+}
+export class PfNavigationList extends PfWebComponent{
+
+}
+export class PfNavigationListItem extends PfWebComponent{
 
 }
