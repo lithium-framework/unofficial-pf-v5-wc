@@ -35,11 +35,24 @@ export class PfNavigation extends PfWebComponent{
   styles: [
     BaseStyle,
     css`${String(NavigationStyles)}`,
+    css`
+      .pf-navigation-list {
+        padding-right: 50px !important;
+      }
+    `
   ],
   shadowOptions: { mode: 'open' }
 })
 export class PfNavigationList extends PfWebComponent{
+  @attr group: "true" | "false" | null = null;
+  
 
+  @state() isGrouped: boolean = false;
+
+  attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
+    if (name === "group") this.isGrouped = this.handleBooleanAttribute(name, newValue);
+    super.attributeChangedCallback(name, oldValue, newValue);
+  }
 }
 
 @customElement({
@@ -49,6 +62,7 @@ export class PfNavigationList extends PfWebComponent{
       <li class="pf-v5-c-nav__item" @click=${(navigationListItem) => navigationListItem.selectCurrent(navigationListItem)}>
         <a href="#" class="pf-v5-c-nav__link">
           <slot></slot>
+          ${navigationListItem.isNoIcon ? html`` : html`<pf-icons-chevron-down></pf-icons-chevron-down>`}
         </a>
       </li>
     `;
@@ -56,10 +70,14 @@ export class PfNavigationList extends PfWebComponent{
   styles: [
     BaseStyle,
     css`${String(NavigationStyles)}`,
-    css`
+    css`     
       .pf-v5-c-nav__item {
         list-style: none !important;
         background-color: #212427 !important;
+      }
+      .pf-v5-c-nav__link{
+        justify-content: space-between !important;
+        width: 96% !important
       }
     `
   ],
@@ -67,11 +85,18 @@ export class PfNavigationList extends PfWebComponent{
 })
 export class PfNavigationListItem extends PfWebComponent {
   @attr current: "true" | "false" | null = null;
+  @attr 'no-icon': "true" | "false" | null = null;
+  @attr 'expandable': "true" | "false" | null = null;
+  
 
   @state() isCurrent: boolean = false;
+  @state() isNoIcon: boolean = false;
+  @state() isExpandable: boolean = false;
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
     if (name === "current") this.isCurrent = this.handleBooleanAttribute(name, newValue);
+    if (name === "no-icon") this.isNoIcon = this.handleBooleanAttribute(name, newValue);
+    if (name === "expandable") this.isNoIcon = this.handleBooleanAttribute(name, newValue);
     super.attributeChangedCallback(name, oldValue, newValue);
   }
 
