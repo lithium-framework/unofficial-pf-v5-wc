@@ -15,7 +15,13 @@ import { PfWebComponent } from '../../models/PfWebComponent';
   }}`,
   styles: [
     BaseStyle,
-    css`${String(NavigationStyles)}`
+    css`${String(NavigationStyles)}`,
+    css`
+    ::slotted(.pf-navigation-list) {
+      padding-right: 50px !important;
+      background-color: #212427 !important;
+    }
+    `
   ],
   shadowOptions: { mode: 'open' }
 })
@@ -27,10 +33,19 @@ export class PfNavigation extends PfWebComponent{
   name: 'pf-navigation-list',
   template: html`${(navigationList: PfNavigationList) => {
     return html`
-    <ul class="pf-v5-c-nav__list" role="list">
-        <slot></slot>
-    </ul>
-    `
+      ${navigationList.isGrouped 
+        ? html`
+          <section class="pf-v5-c-nav__section" aria-labelledby="grouped-title1">
+            <h2 class="pf-v5-c-nav__section-title" id="grouped-title1">Section title 1</h2>
+            <ul class="pf-v5-c-nav__list" role="list">
+              <slot></slot>
+            </ul>
+          </section>`
+        : html`
+          <ul class="pf-v5-c-nav__list" role="list">
+            <slot></slot>
+          </ul>`}
+    `;
   }}`,
   styles: [
     BaseStyle,
@@ -38,14 +53,20 @@ export class PfNavigation extends PfWebComponent{
     css`
       .pf-navigation-list {
         padding-right: 50px !important;
+        background-color: #212427 !important;
+      }
+      .pf-navigation-list::part(.pf-navigation-list){
+        background-color: #212427 !important;
+      }
+      .pf-v5-c-nav__section{
+        background-color: #212427 !important;
       }
     `
   ],
   shadowOptions: { mode: 'open' }
 })
-export class PfNavigationList extends PfWebComponent{
+export class PfNavigationList extends PfWebComponent {
   @attr group: "true" | "false" | null = null;
-  
 
   @state() isGrouped: boolean = false;
 
@@ -78,6 +99,10 @@ export class PfNavigationList extends PfWebComponent{
       .pf-v5-c-nav__link{
         justify-content: space-between !important;
         width: 96% !important
+      }
+      .pf-navigation-list {
+        padding-right: 50px !important;
+        background-color: #212427 !important;
       }
     `
   ],
