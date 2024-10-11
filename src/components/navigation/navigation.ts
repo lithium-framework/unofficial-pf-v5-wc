@@ -38,9 +38,11 @@ export class PfNavigation extends PfWebComponent{
       ${navigationList.isGrouped 
         ? html`
           <section class="pf-v5-c-nav__section" aria-labelledby="grouped-title1">
-            ${!navigationList.isNoTitle 
-              ? html`<h2 class="pf-v5-c-nav__section-title" id="grouped-title1">Section title 1</h2>`
-              : ''}
+            ${navigationList.isNoTitle 
+              ? '' 
+              : html`<h2 class="pf-v5-c-nav__section-title" id="grouped-title1">
+                  <slot name="section-title"></slot>
+                </h2>`}
             <ul part="navigation-list" class="pf-v5-c-nav__list" role="list" ?hidden="${!navigationList.isExpanded}">
               <slot></slot>
             </ul>
@@ -59,7 +61,6 @@ export class PfNavigation extends PfWebComponent{
         padding-right: 50px !important;
         background-color: #212427 !important;
       }
-
       .pf-v5-c-nav__section {
         background-color: #212427 !important;
       }
@@ -70,6 +71,8 @@ export class PfNavigation extends PfWebComponent{
   ],
   shadowOptions: { mode: 'open' }
 })
+
+
 export class PfNavigationList extends PfWebComponent {
   @attr group: "true" | "false" | null = null;
   @attr 'no-title': "true" | "false" | null = null;
@@ -91,7 +94,13 @@ export class PfNavigationList extends PfWebComponent {
     }
     super.attributeChangedCallback(name, oldValue, newValue);
   }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.isExpanded = this.handleBooleanAttribute('expanded', this.expanded);
+  }
 }
+
 
 
 
@@ -167,21 +176,14 @@ export class PfNavigationListItem extends PfWebComponent {
   }
 
   selectCurrent() {
-    const liElement = this.shadowRoot?.querySelector('li');
-    
-    if (liElement) {
-      liElement.classList.toggle('pf-m-current');
-      liElement.classList.toggle('pf-m-expandable');
-      liElement.classList.toggle('pf-m-expanded');
-    }
-
     this.isCurrent = !this.isCurrent;
     this.isExpanded = !this.isExpanded;
-
     this.current = this.isCurrent ? "true" : "false";
     this.expanded = this.isExpanded ? "true" : "false";
   }
-}
+};
+
+
 
 
 
