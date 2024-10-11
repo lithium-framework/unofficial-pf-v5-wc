@@ -37,7 +37,7 @@ export class PfNavigation extends PfWebComponent{
     return html`
       ${navigationList.isGrouped 
         ? html`
-          <section class="pf-v5-c-nav__section" aria-labelledby="grouped-title1">
+          <section class="pf-v5-c-nav__section" ${navigationList.isMultiLevel ? 'pf-v5-c-nav__subnav' : ''} aria-labelledby="grouped-title1">
             ${navigationList.isNoTitle 
               ? '' 
               : html`<h2 class="pf-v5-c-nav__section-title" id="grouped-title1">
@@ -77,21 +77,18 @@ export class PfNavigationList extends PfWebComponent {
   @attr group: "true" | "false" | null = null;
   @attr 'no-title': "true" | "false" | null = null;
   @attr expanded: "true" | "false" | null = null;
+  @attr multilevel: "true" | "false" | null = null;
 
   @state() isGrouped: boolean = false;
   @state() isNoTitle: boolean = false;
   @state() isExpanded: boolean = false;
+  @state() isMultiLevel: boolean = false;
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
-    if (name === "group") {
-      this.isGrouped = this.handleBooleanAttribute(name, newValue);
-    }
-    if (name === "no-title") {
-      this.isNoTitle = this.handleBooleanAttribute(name, newValue);
-    }
-    if (name === "expanded") {
-      this.isExpanded = this.handleBooleanAttribute(name, newValue);
-    }
+    if (name === "group")this.isGrouped = this.handleBooleanAttribute(name, newValue);
+    if (name === "no-title")this.isNoTitle = this.handleBooleanAttribute(name, newValue);
+    if (name === "expanded")this.isExpanded = this.handleBooleanAttribute(name, newValue);
+    if (name === "multilevel")this.isExpanded = this.handleBooleanAttribute(name, newValue);
     super.attributeChangedCallback(name, oldValue, newValue);
   }
 
