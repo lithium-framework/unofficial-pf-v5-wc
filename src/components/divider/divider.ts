@@ -8,7 +8,7 @@ import { PfWebComponent } from "../../models/PfWebComponent";
   name : 'pf-divider',
   template : html`${() => {
 
-    return html`<li class="pf-v5-c-divider" role="separator"></li>`
+    return html`<li class="pf-v5-c-divider" role="separator" part = "controller"></li>`
 
   }}`,
   styles : [

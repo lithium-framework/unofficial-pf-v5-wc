@@ -16,8 +16,7 @@
   "dependencies": {
     "@lithium-framework/core": "^1.8.5-0",
     "@patternfly/react-core": "^5.4.0",
-    "@patternfly/react-styles": "^5.4.0",
-    "unofficial-pf-v5-wc-icons": "file:../unofficial-pf-v5-wc-icons"
+    "@patternfly/react-styles": "^5.4.0"
   },
   "devDependencies": {
     "@microsoft/api-documenter": "^7.25.14",

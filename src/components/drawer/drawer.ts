@@ -8,13 +8,14 @@ import { PfWebComponent } from '../../models/PfWebComponent';
   name : 'pf-drawer-close-button',
   template : html`${() => {
 
-    return html`<div class="pf-v5-c-drawer__close">
+    return html`<div class="pf-v5-c-drawer__close" part = "wrapper" >
       <button
         class="pf-v5-c-button pf-m-plain"
         type="button"
         aria-label="Close drawer panel"
+        part = "button"
       >
-        <i class="fas fa-times" aria-hidden="true"></i>
+        <i class="fas fa-times" aria-hidden="true" part = "icon" ></i>
       </button>
     </div>`;
 
@@ -32,7 +33,7 @@ export class PfDrawerCloseButton extends PfWebComponent{
   name : 'pf-drawer-action',
   template : html`${() => {
 
-    return html`<div class="pf-v5-c-drawer__actions">
+    return html`<div class="pf-v5-c-drawer__actions" part = "controller" >
       <slot></slot>
     </div>`
 
@@ -48,13 +49,22 @@ export class PfDrawerAction extends PfWebComponent{
 
 export const drawerTemplate = html`${( drawer : PfDrawer ) => {
 
-  const body_template = html`<div class="pf-v5-c-drawer__body">
-    <div class="pf-v5-c-drawer__head">
-      <slot name = "panel" ></slot>
-    </div>
+  const body_template = html`<div class="pf-v5-c-drawer__body" part = "body" >
+
+    ${
+      !drawer.isNoPanelHead ?
+      html`<div class="pf-v5-c-drawer__head" part = "head" >
+        <slot name = "panel-header" ></slot>
+      </div>` :
+      html``
+    }
+
+    <slot name = "panel" ></slot>
+
   </div>`;
 
   return html`<div
+      part = "wrapper"
       class=${[
         "pf-v5-c-drawer",
         drawer.isExpanded ? "pf-m-expanded" : null,
@@ -65,26 +75,33 @@ export const drawerTemplate = html`${( drawer : PfDrawer ) => {
         drawer.isPanelLeft ? "pf-m-panel-left" : null,
       ].filter( x  => x ).join(' ')}
     >
-    <div class="pf-v5-c-drawer__main">
-      <div class="pf-v5-c-drawer__content">
-        <div class="pf-v5-c-drawer__body">
+    <div class="pf-v5-c-drawer__main" part = "main" >
+      <div class="pf-v5-c-drawer__content" part = "content" >
+        <div class="pf-v5-c-drawer__body" part = "body" >
           <slot></slot>
         </div>
       </div>
-      <div class=${["pf-v5-c-drawer__panel" , drawer.isResizable ? "pf-m-resizable" : null].filter(x => x).join(' ')} ?hidden = ${ !drawer.isExpanded }>
+      <div 
+        part = "panel"
+        class=${[
+          "pf-v5-c-drawer__panel" , 
+          drawer.isResizable ? "pf-m-resizable" : null
+        ].filter(x => x).join(' ')} 
+        ?hidden = ${ !drawer.isExpanded }>
 
         ${
           drawer.isResizable ?
           html`<div
+            part = "controller"
             class=${["pf-v5-c-drawer__splitter" , !drawer.isPanelBottom ? "pf-m-vertical" : null].filter( x => x ).join(' ')}
             role="separator"
             tabindex="0"
             aria-orientation=${ drawer.isPanelBottom ? "horizontal" : "vertical"}
             @mousedown=${ drawer.onResize }
           >
-            <div class="pf-v5-c-drawer__splitter-handle"></div>
+            <div class="pf-v5-c-drawer__splitter-handle" part = "toggle" ></div>
           </div>
-          <div class="pf-v5-c-drawer__panel-main">
+          <div class="pf-v5-c-drawer__panel-main" part = "main" >
             ${body_template}
           </div>` :
           body_template
@@ -113,6 +130,7 @@ export class PfDrawer extends PfWebComponent{
   @attr() 'panel-right' : "true" | "false" | null = null;
   @attr() 'panel-bottom' : "true" | "false" | null = null;
   @attr() 'panel-left' : "true" | "false" | null = null;
+  @attr() 'no-panel-head' : "true" | "false" | null = null;
 
   @state() isExpanded : boolean = false;
   @state() isInline : boolean = false;
@@ -121,28 +139,39 @@ export class PfDrawer extends PfWebComponent{
   @state() isPanelRight : boolean = false;
   @state() isPanelBottom : boolean = false;
   @state() isPanelLeft : boolean = false;
+  @state() isNoPanelHead : boolean = false;
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
 
-    if( name == "expanded" && !this.isStatic )this.isExpanded = this.handleBooleanAttribute( name , newValue );
-    if( name == "inline" )this.isInline = this.handleBooleanAttribute( name , newValue );
-    if( name == "static" )this.isStatic = this.handleBooleanAttribute( name , newValue );
-    if( name == "resizable" && !this.isStatic )this.isResizable = this.handleBooleanAttribute( name , newValue );
-    if( name == "panel-right" ){
-      this.isPanelRight = this.handleBooleanAttribute( name , newValue );
+    let booleanAttribute = this.handleBooleanAttribute( name , newValue || oldValue );
+
+    if( name == "expanded" && !this.isStatic )this.isExpanded = booleanAttribute;
+
+    else if( name == "inline" )this.isInline = booleanAttribute;
+
+    else if( name == "static" )this.isStatic = booleanAttribute;
+
+    else if( name == "resizable" && !this.isStatic )this.isResizable = booleanAttribute;
+
+    else if( name == "panel-right" ){
+      this.isPanelRight = booleanAttribute;
       if(this.isPanelBottom && this.isPanelRight)this.removeAttribute( 'panel-bottom' );
       if(this.isPanelLeft && this.isPanelRight)this.removeAttribute( 'panel-left' );
     }
-    if( name == "panel-bottom" ){
-      this.isPanelBottom = this.handleBooleanAttribute( name , newValue );
+
+    else if( name == "panel-bottom" ){
+      this.isPanelBottom = booleanAttribute;
       if(this.isPanelRight && this.isPanelBottom)this.removeAttribute( 'panel-right' );
       if(this.isPanelLeft && this.isPanelBottom)this.removeAttribute( 'panel-left' );
     }
-    if( name == "panel-left" ){
-      this.isPanelLeft = this.handleBooleanAttribute( name , newValue );
+
+    else if( name == "panel-left" ){
+      this.isPanelLeft = booleanAttribute;
       if(this.isPanelRight && this.isPanelLeft)this.removeAttribute( 'panel-right' );
       if(this.isPanelBottom && this.isPanelLeft)this.removeAttribute( 'panel-bottom' );
     }
+
+    else if(name = "no-panel-head")this.isNoPanelHead = this.handleBooleanAttribute( name , newValue );
     
     super.attributeChangedCallback( name , oldValue , newValue )
   }

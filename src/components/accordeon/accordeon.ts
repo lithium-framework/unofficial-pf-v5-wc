@@ -2,42 +2,66 @@ import { html , render , WebComponent , customElement , attr , attrState , state
 import { BaseStyle } from '../../css/base';
 import AccordeonStyles from '@patternfly/react-styles/css/components/Accordion/accordion.css';
 import { PfWebComponent } from '../../models/PfWebComponent';
-import  'unofficial-pf-v5-wc-icons';
 
-const factory = () => {
-  return () => {
-
-  }
-}
+export const PfAccordeonStyles = css`AccordeonStyles`;
 
 @customElement({
   name: 'pf-accordeon',
   template: html`${(accordeon: PfAccordeon) => {
     return html`
-      <div class="pf-v5-c-accordion">
-        <h3 @mousedown=${(accordeon) => accordeon.accordeonToggle(accordeon)}>
+      <div 
+        class="pf-v5-c-accordion"
+        part = "wrapper"
+        >
+        <h3 
+          @mousedown=${(accordeon) => accordeon.accordeonToggle(accordeon)}
+          part = "titre"
+          >
+
           <button
             class="pf-v5-c-accordion__toggle ${accordeon.isExpanded ? 'pf-m-expanded' : ''}" ?hidden="${!accordeon.isExpanded}"
             type="button"
             aria-expanded="${accordeon.isExpanded ? 'true' : 'false'}"
+            part = "toggle"
           >
-            <span class="pf-v5-c-accordion__toggle-text">Item one</span>
+            <span 
+              class="pf-v5-c-accordion__toggle-text"
+              part = "text"
+              >
+              <slot name = "text">
+
+              </slot>
+            </span>
+
             ${accordeon.isExpanded ? 
-              html`<pf-icons-chevron-down></pf-icons-chevron-down>` : 
-              html`<pf-icons-chevron-right></pf-icons-chevron-right>`
+              html`<pf-icons-chevron-down part = "icon" ></pf-icons-chevron-down>` : 
+              html`<pf-icons-chevron-right part = "icon" ></pf-icons-chevron-right>`
             }
+
           </button>
+
         </h3>
-        <div class="pf-v5-c-accordion__expandable-content ${accordeon.isExpanded ? 'pf-m-expanded' : ''}" ?hidden="${!accordeon.isExpanded}">
-          <div class="pf-v5-c-accordion__expandable-content-body">
+
+        <div 
+          class=${[
+            "pf-v5-c-accordion__expandable-content",
+            accordeon.isExpanded ? 'pf-m-expanded' : null
+          ].filter( x => x ).join(' ')} 
+          part = "content"
+          ?hidden="${!accordeon.isExpanded}">
+          <div 
+            class="pf-v5-c-accordion__expandable-content-body"
+            part = "body"
+            >
             <slot></slot>
           </div>
         </div>
+
       </div>`;
   }}`,
   styles: [ 
     BaseStyle,
-    css`${String(AccordeonStyles)}`,
+    PfAccordeonStyles,
     css`
       .pf-v5-c-accordion__expandable-content.pf-m-expanded {
         display: block !important;
@@ -59,7 +83,6 @@ const factory = () => {
   ],
   shadowOptions: { mode: 'open' }
 })
-
 export class PfAccordeon extends PfWebComponent {
 
   @attr expanded: "true" | "false" | null = null;

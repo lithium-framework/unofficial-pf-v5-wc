@@ -15,19 +15,23 @@ import { PfWebComponent } from "../../models/PfWebComponent";
       menuToggle.isPrimary ? "pf-m-primary" : null,
       menuToggle.isSecondary ? "pf-m-secondary" : null,
       menuToggle.isPlain ? "pf-m-plain" : null,
-    ].filter( x => x ).join(' ')} ?disabled = ${menuToggle.isDisabled} type="button" aria-expanded=${ String(menuToggle.isExpanded) }>
+    ].filter( x => x ).join(' ')} 
+    ?disabled = ${menuToggle.isDisabled} 
+    type="button" 
+    part = "wrapper"
+    aria-expanded=${ String(menuToggle.isExpanded) }>
       ${
         menuToggle.isIcon ?
-        html`<span class="pf-v5-c-menu-toggle__icon">
-          <span class="pf-v5-c-icon">
-            <span class="pf-v5-c-icon__content">
+        html`<span class="pf-v5-c-menu-toggle__icon" part = "icon" >
+          <span class="pf-v5-c-icon" part = "container" >
+            <span class="pf-v5-c-icon__content" part = "content" >
               <slot name = "icon" onSlotChange=${ menuToggle.cretateOnSlotChangeHandler( "icon" ) }></slot>
             </span>
           </span>
         </span>` :
         html``
       }
-      <span class="pf-v5-c-menu-toggle__text">
+      <span class="pf-v5-c-menu-toggle__text" part = "text" >
         <slot
           onSlotChange=${ menuToggle.cretateOnSlotChangeHandler( null , ( node ) => {
             if( node )menuToggle.isText = true;
@@ -37,8 +41,8 @@ import { PfWebComponent } from "../../models/PfWebComponent";
       </span>
       ${
         menuToggle.badge ?
-        html `<span class="pf-v5-c-menu-toggle__count">
-          <pf-badge>
+        html `<span class="pf-v5-c-menu-toggle__count" part = "badge" >
+          <pf-badge part = "container" >
             <slot 
               name = "badge" 
               onSlotChange=${ menuToggle.cretateOnSlotChangeHandler( "badge" , ( nodes ) => {
@@ -52,17 +56,17 @@ import { PfWebComponent } from "../../models/PfWebComponent";
       ${
         menuToggle.isPlain ?
         menuToggle.isText ?
-        html`<span class="pf-v5-c-menu-toggle__controls">
+        html`<span class="pf-v5-c-menu-toggle__controls" part = "controller" >
           <span class="pf-v5-c-menu-toggle__toggle-icon">
-            <pf-icons-caret-down></pf-icons-caret-down>
+            <pf-icons-caret-down part = "icon" ></pf-icons-caret-down>
           </span>
         </span>`:
-        html`<span class="pf-v5-c-menu-toggle__controls">
-          <span class="pf-v5-c-menu-toggle__toggle-icon"></span>
+        html`<span class="pf-v5-c-menu-toggle__controls" part = "controller">
+          <span class="pf-v5-c-menu-toggle__toggle-icon" part = "toggle" ></span>
         </span>` :
-        html`<span class="pf-v5-c-menu-toggle__controls">
-          <span class="pf-v5-c-menu-toggle__toggle-icon">
-            <pf-icons-caret-down></pf-icons-caret-down>
+        html`<span class="pf-v5-c-menu-toggle__controls" part = "controller">
+          <span class="pf-v5-c-menu-toggle__toggle-icon"  part = "toggle" >
+            <pf-icons-caret-down part = "icon" ></pf-icons-caret-down>
           </span>
         </span>`
       }

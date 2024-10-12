@@ -26,7 +26,7 @@ import { PfWebComponent } from "../../models/PfWebComponent";
   name : 'pf-menu-list',
   template : html`${() => {
 
-    return html`<ul class="pf-v5-c-menu__list" role="menu">
+    return html`<ul class="pf-v5-c-menu__list" role="menu" part = "list" >
       <slot></slot>
     </ul>`
 
@@ -52,7 +52,7 @@ export class PfMenuList extends PfWebComponent{
 
 @customElement({
   name : 'pf-menu-content',
-  template : html`<div class="pf-v5-c-menu__content"><slot></slot></div>`,
+  template : html`<div class="pf-v5-c-menu__content" part = "content" ><slot></slot></div>`,
   styles : [
     BaseStyle,
     css`${MenuStyle}`,
@@ -73,6 +73,7 @@ export class PfMenuContent extends PfWebComponent{
   template : html`${( item : PfMenuItem ) => {
 
     return html`<li 
+      part = "item"
       class=${[
         "pf-v5-c-menu__list-item",
         item.isDisabled ? "pf-m-disabled" : null,
@@ -82,20 +83,20 @@ export class PfMenuContent extends PfWebComponent{
       role="group">
       ${
         item.isLink ?
-        html`<a class="pf-v5-c-menu__item" href=${`${item.link}`} role="menuitem">
-          <span class="pf-v5-c-menu__item-main">
-            <span class="pf-v5-c-menu__item-icon">
+        html`<a class="pf-v5-c-menu__item" href=${`${item.link}`} role="menuitem" part = "controller" >
+          <span class="pf-v5-c-menu__item-main" part = "main" >
+            <span class="pf-v5-c-menu__item-icon" part = "icon" >
               <slot name = "icon"></slot>
             </span>
-            <span class="pf-v5-c-menu__item-text"><slot></slot></span>
+            <span class="pf-v5-c-menu__item-text" part = "text" ><slot></slot></span>
           </span>
         </a>`:
-        html`<button class="pf-v5-c-menu__item" type="button" role="menuitem">
-          <span class="pf-v5-c-menu__item-main">
-            <span class="pf-v5-c-menu__item-icon">
+        html`<button class="pf-v5-c-menu__item" type="button" role="menuitem" part = "controller" >
+          <span class="pf-v5-c-menu__item-main" part = "main" >
+            <span class="pf-v5-c-menu__item-icon" part = "icon" >
               <slot name = "icon"></slot>
             </span>
-            <span class="pf-v5-c-menu__item-text"><slot></slot></span>
+            <span class="pf-v5-c-menu__item-text" part = "text" ><slot></slot></span>
           </span>
         </button>`
       }
@@ -142,6 +143,7 @@ export class PfMenuItem extends PfWebComponent{
   template : html`${( menu:PfMenu ) => {
 
     return html`<div 
+      part = "menu"
       class="pf-v5-c-menu"
       class=${[
         "pf-v5-c-menu",

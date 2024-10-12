@@ -7,30 +7,32 @@ import { PfWebComponent } from '../../models/PfWebComponent';
     name: 'pf-radiobox',
     template: html`${(radio:PfRadio) => {
         return html`<div 
+            part = "wrapper"
             class=${[
                 `pf-v5-c-radio`,
                 radio.isReversed ? "reverse" : ""
             ].join(' ')}
             >
             <input
+                part = "input"
                 class="pf-v5-c-radio__input"
                 type="radio"
                 :checked = ${radio.isChecked}
                 :disabled = ${radio.isDisabled}
             />
-            <label class="pf-v5-c-radio__label">
+            <label class="pf-v5-c-radio__label" part = "label" >
                 <slot></slot>
             </label>
             ${
-                radio.isDescription ? 
-                html`<span class="pf-v5-c-radio__description">
+                !radio.isNoDescription ? 
+                html`<span class="pf-v5-c-radio__description" part = "description" >
                     <slot name="description"></slot>
                 </span>` : 
                 html``
             }
             ${
-                radio.isBody ? 
-                html`<span class="pf-v5-c-radio__body">
+                !radio.isNoBody ? 
+                html`<span class="pf-v5-c-radio__body" part = "body" >
                     <slot name="body"></slot>
                 </span>` : 
                 html``
@@ -60,24 +62,25 @@ import { PfWebComponent } from '../../models/PfWebComponent';
 })
 
 export class PfRadio extends PfWebComponent{
+
     @attr disabled: "true" | "false" | null = null;
     @attr checked: "true" | "false" | null = null;
     @attr reverse: "true" | "false" | null = null;
-    @attr body: "true" | "false" | null = null;
-    @attr description: "true" | "false" | null = null;
+    @attr 'no-body': "true" | "false" | null = null;
+    @attr 'no-description': "true" | "false" | null = null;
 
     @state() isDisabled:boolean = false;
     @state() isChecked:boolean = false;
     @state() isReversed:boolean = false;
-    @state() isDescription:boolean = false;
-    @state() isBody:boolean = false;
+    @state() isNoDescription:boolean = false;
+    @state() isNoBody:boolean = false;
     
     attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
         if( name == "disabled")this.isDisabled = this.handleBooleanAttribute(name, newValue);
         if( name == "checked")this.isChecked = this.handleBooleanAttribute(name, newValue);
         if( name == "reverse")this.isReversed = this.handleBooleanAttribute(name, newValue);
-        if( name == "description")this.isDescription = this.handleBooleanAttribute(name, newValue);
-        if( name == "body")this.isBody = this.handleBooleanAttribute(name, newValue);
+        if( name == "no-description")this.isNoDescription = this.handleBooleanAttribute(name, newValue);
+        if( name == "no-body")this.isNoBody = this.handleBooleanAttribute(name, newValue);
     
         super.attributeChangedCallback( name , oldValue , newValue );
     }

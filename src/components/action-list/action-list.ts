@@ -5,9 +5,15 @@ import ActionListStyle from '@patternfly/react-styles/css/components/ActionList/
 
 @customElement({
   name : 'pf-action-list-item',
-  template : html`<div class="pf-v5-c-action-list__item" part = "controller">
-    <slot></slot>
-  </div>`,
+  template : html`${() => {
+
+    return html`<div 
+      class="pf-v5-c-action-list__item" 
+      part = "item">
+        <slot></slot>
+    </div>`
+
+  }}`,
   styles : [ 
     BaseStyle,
     css`${String(ActionListStyle)}`
@@ -22,9 +28,15 @@ export class PfActionListItem extends WebComponent{
 
 @customElement({
   name : 'pf-action-list-group',
-  template : html`<div class="pf-v5-c-action-list__group" part = "controller">
-    <slot></slot>
-  </div>`,
+  template : html`${() => {
+
+    return html`<div 
+      class="pf-v5-c-action-list__group" 
+      part = "container">
+        <slot></slot>
+    </div>`
+
+  }}`,
   styles : [ 
     BaseStyle,
     css`${String(ActionListStyle)}`
@@ -39,9 +51,15 @@ export class PfActionListGroup extends WebComponent{
 
 @customElement({
   name : 'pf-action-list',
-  template : html`<div class="pf-v5-c-action-list" part = "controller">
-    <slot></slot>
-  </div>`,
+  template : html`${() => {
+
+    return html`<div 
+      class="pf-v5-c-action-list" 
+      part = "list">
+        <slot></slot>
+    </div>`
+
+  }}`,
   styles : [ 
     BaseStyle,
     css`${String(ActionListStyle)}`,

@@ -1,78 +1,54 @@
 import { html , render , WebComponent , customElement , attr , attrState , state, css, ViewTemplate } from '@lithium-framework/core';
 import MastheadStyles from '@patternfly/react-styles/css/components/Masthead/masthead.css';
 import { PfWebComponent } from '../../models/PfWebComponent';
-import  'unofficial-pf-v5-wc-icons';
 
 import { BaseStyle } from '../../css/base';
 
 @customElement({
   name: 'pf-masthead',
   template: html`${(masthead: PfMasthead) => {
+
     return html`
-    <header class=${[
-      "pf-v5-c-masthead",
-      masthead.isDisplayStack ? 'pf-m-display-stack': 'pf-m-display-inline',
-      masthead.isLight ? 'pf-m-light': null,
-      masthead.isInsets ? 'pf-m-inset-sm': null,
-    ].filter( x => x ).join(' ')}>
-      ${
-        !masthead.isNoIcon ?
-        html`
-          <span class="pf-v5-c-masthead__toggle">
-            <slot name="toggle-icon"></slot>
-          </span>
-        ` :
-        html``
-      }
-      ${
-        !masthead.isNoBranding ?
-        html`
-          <div class="pf-v5-c-masthead__main">
-            <a class="pf-v5-c-masthead__brand" href="#">
-              <slot name="brand"></slot>
-            </a>
+      <header 
+        part = "wrapper"
+        class=${[
+          "pf-v5-c-masthead",
+          masthead.isDisplayStack ? 'pf-m-display-stack': 'pf-m-display-inline',
+          masthead.isLight ? 'pf-m-light': null,
+          masthead.isInsets ? 'pf-m-inset-sm': null,
+        ].filter( x => x ).join(' ')}>
+          ${
+            !masthead.isNoIcon ?
+            html`
+              <span class="pf-v5-c-masthead__toggle" part = "toggle" >
+                <slot name="toggle-icon"></slot>
+              </span>
+            ` :
+            html``
+          }
+          ${
+            !masthead.isNoBranding ?
+            html`
+              <div class="pf-v5-c-masthead__main" part = "main" >
+                <a class="pf-v5-c-masthead__brand" href="#" part = "content" >
+                  <slot name="brand"></slot>
+                </a>
+              </div>
+            ` :
+            html``
+          }
+          <div class="pf-v5-c-masthead__content" part = "content" >
+            <div class="pf-v5-l-flex" part = "container" >
+              <slot></slot>
+            </div>
           </div>
-        ` :
-        html``
-      }
-      <div class="pf-v5-c-masthead__content">
-        <div class="pf-v5-l-flex">
-          <slot></slot>
-        </div>
-      </div>
-    </header>`
+      </header>
+    `;
+
   }}`,
   styles: [
     css`${ BaseStyle }`,
     css`${String(MastheadStyles)}`,
-    // css`
-    // .pf-v5-c-masthead{
-    //   padding-right: 20px !important
-    // }  
-    // .pf-v5-c-masthead__toggle > slot{
-    //   padding-right: 10px;
-    //   display: inline-flex;
-    //   gap: 10px;
-    // }
-    // .pf-v5-c-masthead__toggle{
-    //   padding-left: 20px !important;
-    // }
-    // .pf-v5-c-masthead__brand {
-    //   display: inline-flex !important;
-    //   align-self: center !important;
-    //   text-decoration: none !important;
-    // }
-    // .pf-v5-c-masthead__content > .pf-v5-l-flex{
-    //   display: flex;
-    //   align-items: center;
-    // }
-    // .pf-v5-c-masthead__content > .pf-v5-l-flex > slot{
-    //   display: inline-flex;
-    //   gap: 10px;
-    //   align-items: center;
-    //   padding: 10px;
-    // }
-    // `
   ],
   shadowOptions: { mode: 'open' }
 })

@@ -12,6 +12,7 @@ import { PfWebComponent } from "../../models/PfWebComponent";
       ${ 
         item.isLink? 
         html`<a 
+          part = "item"
           class=${[
             "pf-v5-c-dropdown__menu-item",
             item.isDisabled ? "pf-m-disabled" : "",
@@ -22,6 +23,7 @@ import { PfWebComponent } from "../../models/PfWebComponent";
             <slot></slot>
         </a>` :
         html`<button
+          part = "item"
           class=${[
             "pf-v5-c-dropdown__menu-item",
             item.isDisabled ? "pf-m-disabled" : "",
@@ -71,6 +73,7 @@ export class PfDropDownMenuItem extends PfWebComponent{
   template : html`${( menu : PfDropDownMenu ) => {
 
     return html`<ul
+      part = "menu"
       class="pf-v5-c-dropdown__menu"
       aria-labelledby="dropdown-expanded-button"
       role="menu"
@@ -104,6 +107,7 @@ export class PfDropDownMenu extends PfWebComponent{
   template : html`${( dropdown:PfDropDown ) => {
 
     return html`<div 
+      part = "wrapper"
       class=${[
         "pf-v5-c-dropdown",
         dropdown.isExpanded ? "pf-m-expanded" : null,
@@ -111,14 +115,16 @@ export class PfDropDownMenu extends PfWebComponent{
         `dropdown-position-${dropdown.position}`
       ].filter( x => x ).join(' ')}>
         <pf-menu-toggle 
+          part = "toggle"
           @mousedown = ${( ) => { dropdown.expanded = String(!dropdown.isExpanded) as any }} 
           ?plain = ${ dropdown.isPlain }
           ?icon = ${ dropdown.isPlain }>
-            <pf-icons-ellipsis-v slot = "icon"></pf-icons-ellipsis-v>
+            <pf-icons-ellipsis-v slot = "icon" part = "icon" ></pf-icons-ellipsis-v>
             <slot name = "label" ></slot>
           </pf-menu-toggle>
-        <div class = "pf-v5-c-dropdown__container" >
+        <div class = "pf-v5-c-dropdown__container" part = "container">
           <ul
+            part = "menu"
             class="pf-v5-c-dropdown__menu"
             aria-labelledby="dropdown-expanded-button"
             role="menu"

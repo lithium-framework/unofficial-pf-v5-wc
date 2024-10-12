@@ -8,7 +8,9 @@ import { PfWebComponent } from '../../models/PfWebComponent';
   template: html`${(panel: PfPanel) => {
 
     return html`
-      <div class=${[
+      <div
+      part = "wrapper" 
+      class=${[
         "pf-v5-c-panel",
         panel.isRaised ? "pf-m-raised" : "",
         panel.isBordered ? "pf-m-bordered" : "",
@@ -18,10 +20,10 @@ import { PfWebComponent } from '../../models/PfWebComponent';
         ${
           panel.isHeader ? 
           html`
-            <div class="pf-v5-c-panel__header">
+            <div class="pf-v5-c-panel__header" part = "header" >
               <slot name = "header"></slot>
             </div>
-            <hr class="pf-v5-c-divider" />
+            <hr class="pf-v5-c-divider" part = "divider"/>
           ` : 
           html``
         }
@@ -29,8 +31,8 @@ import { PfWebComponent } from '../../models/PfWebComponent';
         ${
           !panel.isNoBody ?
           html`
-            <div class="pf-v5-c-panel__main" tabindex="0">
-              <div class="pf-v5-c-panel__main-body">
+            <div class="pf-v5-c-panel__main" tabindex="0" part = "main" >
+              <div class="pf-v5-c-panel__main-body"  part = "body">
                 <slot></slot>
               </div>
             </div>
@@ -41,7 +43,7 @@ import { PfWebComponent } from '../../models/PfWebComponent';
         ${
           panel.isFooter ? 
           html`
-            <div class="pf-v5-c-panel__footer">
+            <div class="pf-v5-c-panel__footer" part = "footer" >
               <slot name="footer"></slot>
             </div>
           ` : 

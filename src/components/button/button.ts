@@ -30,7 +30,7 @@ import { PfWebComponent } from '../../models/PfWebComponent';
         !button.isDisabled ? `` : button.isDisabled || button.isDisabled == true ? `pf-m-aria-disabled` : null,
         button.isLink ? `pf-m-link` : null
       ].filter( x => x ).join(' ')}
-      part = "controller"
+      part = "button"
       type="button"
       @mousedown = ${ () => (button.onmousedown as any)()() }
       >

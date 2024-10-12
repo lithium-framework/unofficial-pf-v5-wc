@@ -30,16 +30,16 @@ export class PfEmptyStateActions extends PfWebComponent{
   name : 'pf-empty-state',
   template : html`${( emptyState:PfEmptyState ) => {
 
-    return html`<div class="pf-v5-c-empty-state">
-      <div class="pf-v5-c-empty-state__content">
+    return html`<div class="pf-v5-c-empty-state" part = "wrapper" >
+      <div class="pf-v5-c-empty-state__content" part = "content" >
 
         ${
           !emptyState.isNoHeader ?
-          html`<div class="pf-v5-c-empty-state__header">
+          html`<div class="pf-v5-c-empty-state__header" part = "header" >
 
             ${
               !emptyState.isNoIcon ?
-              html`<div class="pf-v5-c-empty-state__icon">
+              html`<div class="pf-v5-c-empty-state__icon" part = "icon" >
                 <slot name = "icon">
 
                 </slot>
@@ -49,8 +49,8 @@ export class PfEmptyStateActions extends PfWebComponent{
 
             ${
               !emptyState.isNoTitle ?
-              html`<div class="pf-v5-c-empty-state__title">
-                <h1 class="pf-v5-c-empty-state__title-text">
+              html`<div class="pf-v5-c-empty-state__title" part = "title" >
+                <h1 class="pf-v5-c-empty-state__title-text" part = "text" >
                   <slot name = "title">
                     
                   </slot>
@@ -65,7 +65,7 @@ export class PfEmptyStateActions extends PfWebComponent{
 
         ${
           !emptyState.isNoBody ?
-          html`<div class="pf-v5-c-empty-state__body">
+          html`<div class="pf-v5-c-empty-state__body" part = "body" >
             <slot>
 
             </slot>
@@ -75,7 +75,7 @@ export class PfEmptyStateActions extends PfWebComponent{
 
         ${
           !emptyState.isNoFooter ?
-          html`<div class="pf-v5-c-empty-state__footer">
+          html`<div class="pf-v5-c-empty-state__footer" part = "footer" >
             <slot name = "footer">
 
             </slot>
