@@ -7,9 +7,13 @@ import  'unofficial-pf-v5-wc-icons';
 @customElement({
   name: 'pf-avatar',
   template: html`${(avatar: PfAvatar) => {
-    return html`<div class="pf-v5-c-avatar pf-m-light"
-      alt="Avatar image light">
-    <pf-icons-user-circle></pf-icons-user-circle>
+    return html`<div 
+      class="pf-v5-c-avatar pf-m-light"
+      alt="Avatar image light"
+      part = "wrapper">
+    <pf-icons-user-circle part = "icon" >
+      
+    </pf-icons-user-circle>
   </div>`
   }}`
 })
