@@ -62,16 +62,23 @@ import { PfWebComponent } from '../../models/PfWebComponent';
     css`${BaseStyle}`,
     css`${String(PageStyles)}`,
     css`
+      :host{
+        height: 100%;
+        width: 100%;
+      }
       .pf-v5-c-page{
         display: grid;
         grid-template-rows: min-content minmax(0, 1fr);
         grid-template-areas: none;
         grid-template-columns: 1fr;
       }
-    :host{
-      height: 100%;
-      width: 100%;
-    }
+      pf-drawer::part(body){
+        padding: 0px;
+        display: grid;
+      }
+      pf-drawer::part(panel){
+        max-width: var(--page-drawer-panel_max-width);
+      }
     `
   ]
 })
