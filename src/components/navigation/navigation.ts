@@ -37,7 +37,7 @@ export class PfNavigation extends PfWebComponent{
     return html`
       ${navigationList.isGrouped 
         ? html`
-          <section class="pf-v5-c-nav__section" ${navigationList.isMultiLevel ? 'pf-v5-c-nav__subnav' : ''} aria-labelledby="grouped-title1">
+          <section class="pf-v5-c-nav__section" aria-labelledby="grouped-title1">
             ${navigationList.isNoTitle 
               ? '' 
               : html`<h2 class="pf-v5-c-nav__section-title" id="grouped-title1">
