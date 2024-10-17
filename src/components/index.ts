@@ -16,6 +16,7 @@ import './masthead';
 import './page';
 import './navigation';
 import './login';
+import './progress-stepper';
 
 export { PfButton , ButtonStyles } from './button/button';
 export { PfBadge , BadgeStyle } from './bagde/badge';
@@ -34,3 +35,4 @@ export { PfMasthead } from './masthead/masthead';
 export { PfPage } from './page/page';
 export { PfNavigation, PfNavigationList, PfNavigationListItem } from './navigation/navigation';
 export { PfLogin} from './login/login';
+export { PfProgressStepper, PfProgressStepperItem} from './progress-stepper/progress-stepper';
