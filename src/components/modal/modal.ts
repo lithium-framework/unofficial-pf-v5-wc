@@ -27,11 +27,24 @@ import  'unofficial-pf-v5-wc-icons';
         <header class="pf-v5-c-modal-box__header">
           ${!modal.isNoHeader ? html`<slot name="header"></slot>` : html``}
         </header>
-        <div class="pf-v5-c-modal-box__body" id="modal-sm-description">
+        ${modal.isScrollable ? html`<div class="pf-v5-c-modal-box__body" id="modal-sm-description">
+          <pf-panel scrollable>
+            <slot></slot>
+          </pf-panel>
+        </div>` : html`<div class="pf-v5-c-modal-box__body" id="modal-sm-description">
           <slot></slot>
-        </div>
+        </div>`}
         <footer class="pf-v5-c-modal-box__footer">
-          ${!modal.isNoFooter ? html`<slot name="footer"></slot>` : html``}
+          ${!modal.isNoFooter ? html`<slot name="footer">
+              <pf-action-list>
+                <pf-action-list-item>
+                  <pf-button primary @click=${() => modal.closeModal()}>Confirm</pf-button>
+                </pf-action-list-item>
+                <pf-action-list-item>
+                  <pf-button secondary @click=${() => modal.closeModal()}>Cancel</pf-button>
+                </pf-action-list-item>
+              </pf-action-list>
+            </slot>` : html``}
         </footer>
       </div>` : html``}`
   }}`,
@@ -50,16 +63,17 @@ import  'unofficial-pf-v5-wc-icons';
       }
       .pf-v5-c-modal-box__close {
         cursor: pointer;
-      }
+      }  
     `
   ]
 })
 export class PfModalBox extends PfWebComponent {
   @attr() 'no-header': "true" | "false" | null = null;
   @attr() 'no-footer': "true" | "false" | null = null;
-  @attr() small : "true" | "false" | null = null;
-  @attr() medium : "true" | "false" | null = null;
-  @attr() large : "true" | "false" | null = null;
+  @attr() small: "true" | "false" | null = null;
+  @attr() medium: "true" | "false" | null = null;
+  @attr() large: "true" | "false" | null = null;
+  @attr() scrollable: "true" | "false" | null = null;
 
   @state() isNoHeader: boolean = false;
   @state() isNoFooter: boolean = false;
@@ -67,6 +81,7 @@ export class PfModalBox extends PfWebComponent {
   @state() isSmall: boolean = false;
   @state() isMedium: boolean = false;
   @state() isLarge: boolean = false;
+  @state() isScrollable: boolean = false;
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
     if (name === "no-header") this.isNoHeader = this.handleBooleanAttribute(name, newValue);
@@ -74,6 +89,7 @@ export class PfModalBox extends PfWebComponent {
     if (name === "small") this.isSmall = this.handleBooleanAttribute(name, newValue);
     if (name === "medium") this.isMedium = this.handleBooleanAttribute(name, newValue);
     if (name === "large") this.isLarge = this.handleBooleanAttribute(name, newValue);
+    if (name === "scrollable") this.isScrollable = this.handleBooleanAttribute(name, newValue); // Correction ici
     super.attributeChangedCallback(name, oldValue, newValue);
   }
 
@@ -81,5 +97,7 @@ export class PfModalBox extends PfWebComponent {
     this.isOpen = false;
   }
 }
+
+
 
 
