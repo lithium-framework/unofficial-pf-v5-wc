@@ -1,9 +1,9 @@
-## PfCheckbox class
+## PfMasthead class
 
 **Signature:**
 
 ```typescript
-export declare class PfCheckbox extends PfWebComponent 
+export declare class PfMasthead extends PfWebComponent 
 ```
 **Extends:** [PfWebComponent](./pfwebcomponent)
 
@@ -32,7 +32,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-["no-body"](./_no-body_)
+["display-stack"](./_display-stack_)
 
 
 </td><td>
@@ -49,7 +49,7 @@ Description
 </td></tr>
 <tr><td>
 
-["no-description"](./_no-description_)
+["no-branding"](./_no-branding_)
 
 
 </td><td>
@@ -66,7 +66,7 @@ Description
 </td></tr>
 <tr><td>
 
-[checked](./checked)
+["no-toggle"](./_no-toggle_)
 
 
 </td><td>
@@ -83,7 +83,7 @@ Description
 </td></tr>
 <tr><td>
 
-[disabled](./disabled)
+[insets](./insets)
 
 
 </td><td>
@@ -100,7 +100,7 @@ Description
 </td></tr>
 <tr><td>
 
-[isChecked](./ischecked)
+[isDisplayStack](./isdisplaystack)
 
 
 </td><td>
@@ -117,7 +117,7 @@ boolean
 </td></tr>
 <tr><td>
 
-[isDisabled](./isdisabled)
+[isInsets](./isinsets)
 
 
 </td><td>
@@ -134,7 +134,7 @@ boolean
 </td></tr>
 <tr><td>
 
-[isNoBody](./isnobody)
+[isLight](./islight)
 
 
 </td><td>
@@ -151,7 +151,7 @@ boolean
 </td></tr>
 <tr><td>
 
-[isNoDescription](./isnodescription)
+[isNoBranding](./isnobranding)
 
 
 </td><td>
@@ -168,7 +168,7 @@ boolean
 </td></tr>
 <tr><td>
 
-[isRequired](./isrequired)
+[isNoIcon](./isnoicon)
 
 
 </td><td>
@@ -185,41 +185,7 @@ boolean
 </td></tr>
 <tr><td>
 
-[isReversed](./isreversed)
-
-
-</td><td>
-
-
-</td><td>
-
-boolean
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[required](./required)
-
-
-</td><td>
-
-
-</td><td>
-
-"true" \| "false" \| null
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[reverse](./reverse)
+[light](./light)
 
 
 </td><td>

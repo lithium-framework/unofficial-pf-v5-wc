@@ -32,6 +32,23 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+["no-icon"](./_no-icon_)
+
+
+</td><td>
+
+
+</td><td>
+
+"true" \| "false" \| null
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [custom](./custom)
 
 
@@ -118,6 +135,23 @@ boolean
 <tr><td>
 
 [isInfo](./isinfo)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[isNoIcon](./isnoicon)
 
 
 </td><td>

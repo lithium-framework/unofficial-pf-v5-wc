@@ -12,8 +12,6 @@ export function HandleBooleanAttribute(this: PfWebComponent, name: string, newVa
     return true;
   }
 
-  console.log("undefined");
-
   // Si la nouvelle valeur est présente, on vérifie qu'elle n'est pas "false"
   return newValue.toLowerCase() !== "false";
 }

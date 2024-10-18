@@ -32,7 +32,24 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-[body](./body)
+["no-body"](./_no-body_)
+
+
+</td><td>
+
+
+</td><td>
+
+"true" \| "false" \| null
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+["no-description"](./_no-description_)
 
 
 </td><td>
@@ -66,23 +83,6 @@ Description
 </td></tr>
 <tr><td>
 
-[description](./description)
-
-
-</td><td>
-
-
-</td><td>
-
-"true" \| "false" \| null
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
 [disabled](./disabled)
 
 
@@ -92,23 +92,6 @@ Description
 </td><td>
 
 "true" \| "false" \| null
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[isBody](./isbody)
-
-
-</td><td>
-
-
-</td><td>
-
-boolean
 
 
 </td><td>
@@ -134,7 +117,7 @@ boolean
 </td></tr>
 <tr><td>
 
-[isDescription](./isdescription)
+[isDisabled](./isdisabled)
 
 
 </td><td>
@@ -151,7 +134,24 @@ boolean
 </td></tr>
 <tr><td>
 
-[isDisabled](./isdisabled)
+[isNoBody](./isnobody)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[isNoDescription](./isnodescription)
 
 
 </td><td>

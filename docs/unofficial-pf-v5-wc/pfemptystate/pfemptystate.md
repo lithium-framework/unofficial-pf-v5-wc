@@ -1,9 +1,9 @@
-## PfCheckbox class
+## PfEmptyState class
 
 **Signature:**
 
 ```typescript
-export declare class PfCheckbox extends PfWebComponent 
+export declare class PfEmptyState extends PfWebComponent 
 ```
 **Extends:** [PfWebComponent](./pfwebcomponent)
 
@@ -49,7 +49,7 @@ Description
 </td></tr>
 <tr><td>
 
-["no-description"](./_no-description_)
+["no-footer"](./_no-footer_)
 
 
 </td><td>
@@ -66,7 +66,7 @@ Description
 </td></tr>
 <tr><td>
 
-[checked](./checked)
+["no-header"](./_no-header_)
 
 
 </td><td>
@@ -83,7 +83,7 @@ Description
 </td></tr>
 <tr><td>
 
-[disabled](./disabled)
+["no-icon"](./_no-icon_)
 
 
 </td><td>
@@ -100,7 +100,7 @@ Description
 </td></tr>
 <tr><td>
 
-[isChecked](./ischecked)
+["no-title"](./_no-title_)
 
 
 </td><td>
@@ -108,24 +108,7 @@ Description
 
 </td><td>
 
-boolean
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[isDisabled](./isdisabled)
-
-
-</td><td>
-
-
-</td><td>
-
-boolean
+"true" \| "false" \| null
 
 
 </td><td>
@@ -151,7 +134,7 @@ boolean
 </td></tr>
 <tr><td>
 
-[isNoDescription](./isnodescription)
+[isNoFooter](./isnofooter)
 
 
 </td><td>
@@ -168,7 +151,7 @@ boolean
 </td></tr>
 <tr><td>
 
-[isRequired](./isrequired)
+[isNoHeader](./isnoheader)
 
 
 </td><td>
@@ -185,7 +168,7 @@ boolean
 </td></tr>
 <tr><td>
 
-[isReversed](./isreversed)
+[isNoIcon](./isnoicon)
 
 
 </td><td>
@@ -202,7 +185,7 @@ boolean
 </td></tr>
 <tr><td>
 
-[required](./required)
+[isNoTitle](./isnotitle)
 
 
 </td><td>
@@ -210,24 +193,7 @@ boolean
 
 </td><td>
 
-"true" \| "false" \| null
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[reverse](./reverse)
-
-
-</td><td>
-
-
-</td><td>
-
-"true" \| "false" \| null
+boolean
 
 
 </td><td>

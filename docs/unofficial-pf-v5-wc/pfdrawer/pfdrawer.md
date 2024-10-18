@@ -32,6 +32,23 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+["no-panel-head"](./_no-panel-head_)
+
+
+</td><td>
+
+
+</td><td>
+
+"true" \| "false" \| null
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 ["panel-bottom"](./_panel-bottom_)
 
 
@@ -135,6 +152,23 @@ boolean
 <tr><td>
 
 [isInline](./isinline)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[isNoPanelHead](./isnopanelhead)
 
 
 </td><td>

@@ -3,9 +3,9 @@
 **Signature:**
 
 ```typescript
-export declare class PfBadge extends WebComponent 
+export declare class PfBadge extends PfWebComponent 
 ```
-**Extends:** WebComponent
+**Extends:** [PfWebComponent](./pfwebcomponent)
 
 ## Properties
 
@@ -49,7 +49,7 @@ boolean
 </td></tr>
 <tr><td>
 
-[readed](./readed)
+[read](./read)
 
 
 </td><td>

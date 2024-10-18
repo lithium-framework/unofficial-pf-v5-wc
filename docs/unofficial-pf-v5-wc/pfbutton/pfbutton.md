@@ -100,6 +100,23 @@ boolean
 </td></tr>
 <tr><td>
 
+[isLink](./islink)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [isPrimary](./isprimary)
 
 
@@ -160,6 +177,23 @@ boolean
 </td><td>
 
 boolean
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[link](./link)
+
+
+</td><td>
+
+
+</td><td>
+
+"true" \| "false" \| null
 
 
 </td><td>
