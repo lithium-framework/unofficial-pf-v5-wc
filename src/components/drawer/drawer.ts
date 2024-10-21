@@ -1,4 +1,4 @@
-import { html , customElement , WebComponent , css , state , attr } from '@lithium-framework/core';
+import { html , customElement , WebComponent , css , state , attr, effect , ref , createRef } from '@lithium-framework/core';
 import { BaseStyle } from '../../css/base';
 
 import DrawerStyles from '@patternfly/react-styles/css/components/Drawer/drawer.css';
@@ -64,6 +64,7 @@ export const drawerTemplate = html`${( drawer : PfDrawer ) => {
   </div>`;
 
   return html`<div
+      ${ref( drawer.$wrapper )}
       part = "wrapper"
       class=${[
         "pf-v5-c-drawer",
@@ -132,14 +133,65 @@ export class PfDrawer extends PfWebComponent{
   @attr() 'panel-left' : "true" | "false" | null = null;
   @attr() 'no-panel-head' : "true" | "false" | null = null;
 
-  @state() isExpanded : boolean = false;
-  @state() isInline : boolean = false;
-  @state() isStatic : boolean = false;
+  @state({ lazy : true }) isExpanded : boolean = false;
+  @state({ lazy : true }) isInline : boolean = false;
+  @state({ lazy : true }) isStatic : boolean = false;
   @state() isResizable : boolean = false;
   @state() isPanelRight : boolean = false;
   @state() isPanelBottom : boolean = false;
   @state() isPanelLeft : boolean = false;
   @state() isNoPanelHead : boolean = false;
+
+  @state({ lazy : true }) $wrapper = createRef< HTMLDivElement >();
+  get wrapper(){ return this.$wrapper.value }
+  get main(){ return this.wrapper?.getElementsByClassName("pf-v5-c-drawer__main")[0] }
+  get content(){ return this.wrapper?.getElementsByClassName("pf-v5-c-drawer__content")[0] }
+  get body(){ return this.wrapper?.getElementsByClassName("pf-v5-c-drawer__body")[0] }
+  get panel(){ 
+    const wrapper = this.wrapper;
+    const panel = wrapper?.getElementsByClassName("pf-v5-c-drawer__panel")[0];
+    return !panel ? null : Object.assign( panel , {
+      get controller(){
+        return wrapper?.getElementsByClassName("pf-v5-c-drawer__splitter")[0]
+      },
+      get main(){
+        return wrapper?.getElementsByClassName("pf-v5-c-drawer__panel-main")[0]
+      }
+    } )
+  }
+
+  @effect(["isExpanded"]) handleExpanded = () => {
+
+    if(!this.wrapper)return ;
+
+    if(this.isExpanded){
+      this.wrapper.classList.add( "pf-m-expanded" );
+      this.panel?.removeAttribute('hidden');
+    }
+    else {
+      this.wrapper.classList.remove( "pf-m-expanded" );
+      this.panel?.setAttribute('hidden' , `${!this.isExpanded}`);
+    }
+
+  }
+
+  @effect(["isInline"]) handleInline = () => {
+
+    if(!this.wrapper)return ;
+
+    if(this.isInline){this.wrapper.classList.add( "pf-m-inline" );}
+    else {this.wrapper.classList.remove( "pf-m-inline" );}
+
+  }
+
+  @effect(["isStatic"]) handleStatic = () => {
+
+    if(!this.wrapper)return ;
+
+    if(this.isStatic){this.wrapper.classList.add( "pf-m-static" );}
+    else {this.wrapper.classList.remove( "pf-m-static" );}
+
+  }
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
 

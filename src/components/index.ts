@@ -35,6 +35,6 @@ export { PfBackToTop } from './backtotop/backtotop';
 export { PfMasthead } from './masthead/masthead';
 export { PfPage } from './page/page';
 export { PfEmptyState } from './empty-state/empty-state';
-export { PfNavigation, PfNavigationList, PfNavigationListItem } from './navigation/navigation';
-export { PfLogin} from './login/login';
+export { PfNavigation, PfNavigationList, PfNavigationListItem } from './navigation/index';
+export { PfLogin} from './login/index';
 export { PfProgressStepper, PfProgressStepperItem} from './progress-stepper/progress-stepper';

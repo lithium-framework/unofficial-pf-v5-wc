@@ -1,4 +1,4 @@
-import { html, WebComponent , customElement, css, ViewTemplate , state, attr , ref , createRef } from "@lithium-framework/core";
+import { html, WebComponent , customElement, css, ViewTemplate , state, attr , ref , createRef, effect } from "@lithium-framework/core";
 
 import DropDownStyles from '@patternfly/react-styles/css/components/Dropdown/dropdown.css';
 import { BaseStyle } from "../../css/base";

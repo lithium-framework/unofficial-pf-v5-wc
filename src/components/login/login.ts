@@ -2,7 +2,6 @@ import { html , render , WebComponent , customElement , attr , attrState , state
 import { BaseStyle } from '../../css/base';
 import LoginStyles from '@patternfly/react-styles/css/components/Login/login.css';
 import { PfWebComponent } from '../../models/PfWebComponent';
-import  'unofficial-pf-v5-wc-icons';
 
 @customElement({
   name: 'pf-login',

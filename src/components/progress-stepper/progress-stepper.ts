@@ -2,7 +2,6 @@ import { html , render , WebComponent , customElement , attr , attrState , state
 import { BaseStyle } from '../../css/base';
 import ProgressStepperStyles from '@patternfly/react-styles/css/components/ProgressStepper/progress-stepper.css';
 import { PfWebComponent } from '../../models/PfWebComponent';
-import  'unofficial-pf-v5-wc-icons';
 
 @customElement({
   name: 'pf-progress-stepper-item',
