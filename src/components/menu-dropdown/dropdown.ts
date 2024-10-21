@@ -1,4 +1,4 @@
-import { html, WebComponent , customElement, css, ViewTemplate , state, attr , ref , createRef, effect } from "@lithium-framework/core";
+import { html, WebComponent , customElement, css, ViewTemplate , state, attr , ref , createRef, effect , render, repeat } from "@lithium-framework/core";
 
 import DropDownStyles from '@patternfly/react-styles/css/components/Dropdown/dropdown.css';
 import { BaseStyle } from "../../css/base";
@@ -72,24 +72,31 @@ export class PfDropDownMenuItem extends PfWebComponent{
   name : 'pf-dropdown-menu',
   template : html`${( menu : PfDropDownMenu ) => {
 
-    return html`<ul
-      part = "menu"
-      class="pf-v5-c-dropdown__menu"
-      aria-labelledby="dropdown-expanded-button"
-      role="menu"
-    >
-      <slot></slot>
-    </ul>`
+    return html`<div class = "pf-v5-c-dropdown pf-v5-c-dropdown__container" part = "container">
+      <ul
+        part = "menu"
+        class="pf-v5-c-dropdown__menu"
+        aria-labelledby="dropdown-expanded-button"
+        role="menu"
+      >
+        <slot></slot>
+      </ul>
+    </div>`
 
   }}`,
   styles : [
+    BaseStyle,
     css`${DropDownStyles}`,
     css`
+      :host([hidden]) { 
+        display: block
+      }
+
       .pf-v5-c-dropdown__menu{
         padding: 8px;
         margin: 0;
       }
-    `
+    `,
   ]
 })
 export class PfDropDownMenu extends PfWebComponent{
@@ -136,6 +143,7 @@ export class PfDropDownMenu extends PfWebComponent{
 
   }}`,
   styles : [
+    BaseStyle,
     css`${DropDownStyles}`,
     css`
       .pf-v5-c-dropdown{
@@ -183,7 +191,7 @@ export class PfDropDown extends PfWebComponent{
   @attr() expanded : "true" | "false" | null = null;
   @attr() plain : "true" | "false" | null = null;
 
-  @state() isExpanded = false;
+  @state({ lazy : true }) isExpanded = false;
   @state() isPlain = false;
 
   @state() direction : "up" | "down" = "down";
@@ -192,7 +200,19 @@ export class PfDropDown extends PfWebComponent{
   @state() position : 'right' | 'left' | 'center' | 'start' | 'end' = "center";
   @state() width : string = "";
 
+  @effect([ "isExpanded" ]) toggleExpand = () => {
+
+    if (this.isExpanded) {
+      this.attachToGlobalContainer();
+    } else {
+      this.removeFromGlobalContainer();
+    }
+
+  }
+
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
+
+    console.log({ name , oldValue , newValue })
 
     if( name == "expanded" )this.isExpanded = this.handleBooleanAttribute( name , newValue );
     if( name == "plain" )this.isPlain = this.handleBooleanAttribute( name , newValue );
@@ -216,6 +236,47 @@ export class PfDropDown extends PfWebComponent{
 
     super.connectedCallback();
     
+  }
+
+  attachToGlobalContainer() {
+
+    // let menu = this.shadowRoot?.querySelector('.pf-v5-c-dropdown__menu') as HTMLElement;
+
+    const { lastChild : menu } = render( html`<pf-dropdown-menu></pf-dropdown-menu>` , document.body );
+
+      this.childNodes.forEach(( child ) => {
+        menu.appendChild( child.cloneNode(true) )
+      })
+
+    const rect = this.getBoundingClientRect();
+    menu.style.position = 'absolute';
+    menu.style.top = `${rect.bottom}px`;
+    menu.style.left = `${rect.left}px`;
+    menu.style.width = `${rect.width}px`;
+
+    // if (menu && document.querySelector('#dropdown-container')) {
+      
+    //   // menu = document.body?.appendChild(menu);
+    //   // Position the menu absolutely relative to the dropdown button
+    //   const rect = this.getBoundingClientRect();
+    //   menu.style.position = 'absolute';
+    //   menu.style.top = `${rect.bottom}px`;
+    //   menu.style.left = `${rect.left}px`;
+    //   menu.style.width = `${rect.width}px`;
+    // }
+  }
+
+  removeFromGlobalContainer() {
+    const menu = document.querySelector('#dropdown-container .pf-v5-c-dropdown__menu');
+    if (menu) {
+      this.shadowRoot?.appendChild(menu);
+    }
+  }
+
+  disconnectedCallback() {
+    // Clean up the global container
+    this.removeFromGlobalContainer();
+    super.disconnectedCallback();
   }
 
 }
