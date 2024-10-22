@@ -31,9 +31,12 @@ import  'unofficial-pf-v5-wc-icons';
           <pf-panel scrollable>
             <slot></slot>
           </pf-panel>
+          <slot name="extra-slot"></slot>
         </div>` : html`<div class="pf-v5-c-modal-box__body" id="modal-sm-description">
           <slot></slot>
-        </div>`}
+        </div>
+        <slot name="extra-slot"></slot>
+        `}
         <footer class="pf-v5-c-modal-box__footer">
           ${!modal.isNoFooter ? html`<slot name="footer">
               <pf-action-list>
