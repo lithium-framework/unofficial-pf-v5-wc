@@ -120,6 +120,13 @@ export const drawerTemplate = html`${( drawer : PfDrawer ) => {
   styles : [
     BaseStyle,
     css`${DrawerStyles}`,
+    css`
+      .pf-v5-c-drawer__body{
+        display: block;
+        height: 100%;
+        width: 100%;
+      }
+    `
   ]
 })
 export class PfDrawer extends PfWebComponent{

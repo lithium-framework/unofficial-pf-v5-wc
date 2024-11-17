@@ -185,6 +185,23 @@ Description
 </td></tr>
 <tr><td>
 
+["masterhead-inside"](./_masterhead-inside_)
+
+
+</td><td>
+
+
+</td><td>
+
+"true" \| "false" \| null
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 ["masterhead-light"](./_masterhead-light_)
 
 
@@ -373,6 +390,23 @@ boolean
 <tr><td>
 
 [isMasterheadInsets](./ismasterheadinsets)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[isMasterheadInside](./ismasterheadinside)
 
 
 </td><td>

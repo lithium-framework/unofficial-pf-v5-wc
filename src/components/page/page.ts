@@ -9,23 +9,29 @@ import { PfWebComponent } from '../../models/PfWebComponent';
 
     return html`
       <div class="pf-v5-c-page" part = "wrapper" >
-        <pf-masthead
-          ?no-toggle = ${ page.isNoMasterheadIcon }
-          ?no-branding = ${ page.isNoMasterheadBranding }
-          ?display-stack = ${ page.isMasterheadStack }
-          ?light = ${ page.isMasterheadLight }
-          ?insets = ${ page.isMasterheadInsets }
-          part = "header"
-        >
-          <div slot = "icon-toggle" part = "toggle">
-            <slot name = "masthead-icon-toggle" >
+
+        ${
+          !page.isMasterheadInside ?
+          html`<pf-masthead
+            ?no-toggle = ${ page.isNoMasterheadIcon }
+            ?no-branding = ${ page.isNoMasterheadBranding }
+            ?display-stack = ${ page.isMasterheadStack }
+            ?light = ${ page.isMasterheadLight }
+            ?insets = ${ page.isMasterheadInsets }
+            part = "header"
+          >
+            <div slot = "icon-toggle" part = "toggle">
+              <slot name = "masthead-icon-toggle" >
+
+              </slot>
+            </div>
+            <slot name = "masthead-content">
 
             </slot>
-          </div>
-          <slot name = "masthead-content">
+          </pf-masthead>` :
+          html``
+        }
 
-          </slot>
-        </pf-masthead>
         <pf-drawer
           ?expanded = ${ page.isDrawerExpanded }
           ?inline = ${ page.isDrawerInline }
@@ -45,14 +51,37 @@ import { PfWebComponent } from '../../models/PfWebComponent';
             </div>` :
             html``
           }
-          <div slot = "panel" part = "panel" >
+
+          <div slot = "panel" part = "panel">
+
             <slot name = "drawer-panel" >
 
             </slot>
-          </div>
-          <slot>
 
-          </slot>
+          </div>
+
+          ${
+              page.isMasterheadInside ?
+              html`<pf-masthead
+                ?no-toggle = ${ page.isNoMasterheadIcon }
+                ?no-branding = ${ page.isNoMasterheadBranding }
+                ?display-stack = ${ page.isMasterheadStack }
+                ?light = ${ page.isMasterheadLight }
+                ?insets = ${ page.isMasterheadInsets }
+                part = "header"
+              >
+                <div slot = "icon-toggle" part = "toggle">
+                  <slot name = "masthead-icon-toggle" >
+
+                  </slot>
+                </div>
+                <slot name = "masthead-content">
+
+                </slot>
+              </pf-masthead><slot></slot>` :
+              html`<slot></slot>`
+            }
+
         </pf-drawer>
       </div>
     `;
@@ -72,12 +101,26 @@ import { PfWebComponent } from '../../models/PfWebComponent';
         grid-template-areas: none;
         grid-template-columns: 1fr;
       }
+      pf-drawer::part(content){
+        z-index: 1;
+      }
       pf-drawer::part(body){
         padding: 0px;
-        display: grid;
+        height: 100%;
+        overflow: auto;
       }
       pf-drawer::part(panel){
         max-width: var(--page-drawer-panel_max-width);
+        z-index: 2;
+        overflow: visible;
+      }
+      pf-drawer div[part=panel]{
+        height: 100%;
+      }
+    `,
+    css`
+      :host([masterhead-inside]) .pf-v5-c-page{
+        grid-template-rows: minmax(0, 1fr);
       }
     `
   ]
@@ -85,19 +128,20 @@ import { PfWebComponent } from '../../models/PfWebComponent';
 
 export class PfPage extends PfWebComponent{
 
-  @attr "drawer-expanded" : "true" | "false" | null = null;
-  @attr "drawer-no-panel-header" : "true" | "false" | null = null;
-  @attr "drawer-panel-right" : "true" | "false" | null = null;
-  @attr "drawer-panel-bottom" : "true" | "false" | null = null;
-  @attr "drawer-panel-left" : "true" | "false" | null = null;
-  @attr "drawer-inline" : "true" | "false" | null = null;
-  @attr "drawer-resizable" : "true" | "false" | null = null;
-  @attr "drawer-static" : "true" | "false" | null = null;
-  @attr "masterhead-stack" : "true" | "false" | null = null;
-  @attr "masterhead-light" : "true" | "false" | null = null;
-  @attr "masterhead-insets" : "true" | "false" | null = null;
-  @attr "masterhead-no-icon" : "true" | "false" | null = null;
-  @attr "masterhead-no-branding" : "true" | "false" | null = null;
+  @attr() "drawer-expanded" : "true" | "false" | null = null;
+  @attr() "drawer-no-panel-header" : "true" | "false" | null = null;
+  @attr() "drawer-panel-right" : "true" | "false" | null = null;
+  @attr() "drawer-panel-bottom" : "true" | "false" | null = null;
+  @attr() "drawer-panel-left" : "true" | "false" | null = null;
+  @attr() "drawer-inline" : "true" | "false" | null = null;
+  @attr() "drawer-resizable" : "true" | "false" | null = null;
+  @attr() "drawer-static" : "true" | "false" | null = null;
+  @attr() "masterhead-inside" : "true" | "false" | null = null;
+  @attr() "masterhead-stack" : "true" | "false" | null = null;
+  @attr() "masterhead-light" : "true" | "false" | null = null;
+  @attr() "masterhead-insets" : "true" | "false" | null = null;
+  @attr() "masterhead-no-icon" : "true" | "false" | null = null;
+  @attr() "masterhead-no-branding" : "true" | "false" | null = null;
 
   @state() isDrawerExpanded : boolean = false; 
   @state() isNoDrawerPanelHeader : boolean = false; 
@@ -107,6 +151,7 @@ export class PfPage extends PfWebComponent{
   @state() isDrawerInline : boolean = false; 
   @state() isDrawerResizable : boolean = false; 
   @state() isDrawerStatic : boolean = false; 
+  @state() isMasterheadInside : boolean = false; 
   @state() isMasterheadStack : boolean = false; 
   @state() isMasterheadLight : boolean = false; 
   @state() isMasterheadInsets : boolean = false; 
@@ -123,6 +168,7 @@ export class PfPage extends PfWebComponent{
     if( name == "drawer-inline" )this.isDrawerInline = this.handleBooleanAttribute(name, newValue);
     if( name == "drawer-resizable" )this.isDrawerResizable = this.handleBooleanAttribute(name, newValue);
     if( name == "drawer-static" )this.isDrawerStatic = this.handleBooleanAttribute(name, newValue);
+    if( name == "masterhead-inside" )this.isMasterheadInside = this.handleBooleanAttribute(name, newValue);
     if( name == "masterhead-stack" )this.isMasterheadStack = this.handleBooleanAttribute(name, newValue);
     if( name == "masterhead-light" )this.isMasterheadLight = this.handleBooleanAttribute(name, newValue);
     if( name == "masterhead-insets" )this.isMasterheadInsets = this.handleBooleanAttribute(name, newValue);

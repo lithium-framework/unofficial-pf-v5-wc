@@ -18,6 +18,7 @@ import './empty-state';
 import './navigation';
 import './login';
 import './progress-stepper';
+import './treeview';
 
 export { PfButton , ButtonStyles } from './button/button';
 export { PfBadge , BadgeStyle } from './bagde/badge';
@@ -38,3 +39,4 @@ export { PfEmptyState } from './empty-state/empty-state';
 export { PfNavigation, PfNavigationList, PfNavigationListItem } from './navigation/index';
 export { PfLogin} from './login/index';
 export { PfProgressStepper, PfProgressStepperItem} from './progress-stepper/progress-stepper';
+export * from './treeview/index';

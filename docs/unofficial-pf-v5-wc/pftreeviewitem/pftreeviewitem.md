@@ -1,9 +1,9 @@
-## PfMenuToggle class
+## PfTreeViewItem class
 
 **Signature:**
 
 ```typescript
-export declare class PfMenuToggle extends PfWebComponent 
+export declare class PfTreeViewItem extends PfWebComponent 
 ```
 **Extends:** [PfWebComponent](./pfwebcomponent)
 
@@ -32,7 +32,7 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
-["no-text"](./_no-text_)
+["no-action"](./_no-action_)
 
 
 </td><td>
@@ -49,41 +49,7 @@ Description
 </td></tr>
 <tr><td>
 
-[$\_controller](./__controller)
-
-
-</td><td>
-
-
-</td><td>
-
-import("@lithium-framework/core").IElementRef&lt;HTMLButtonElement&gt;
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[badge](./badge)
-
-
-</td><td>
-
-
-</td><td>
-
-"true" \| "false" \| null
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[disabled](./disabled)
+["no-toggle"](./_no-toggle_)
 
 
 </td><td>
@@ -117,7 +83,7 @@ import("@lithium-framework/core").IElementRef&lt;HTMLButtonElement&gt;
 </td></tr>
 <tr><td>
 
-[icon](./icon)
+[handleSelect](./handleselect)
 
 
 </td><td>
@@ -125,24 +91,7 @@ import("@lithium-framework/core").IElementRef&lt;HTMLButtonElement&gt;
 
 </td><td>
 
-"true" \| "false" \| null
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[isBadge](./isbadge)
-
-
-</td><td>
-
-
-</td><td>
-
-boolean
+null
 
 
 </td><td>
@@ -151,7 +100,7 @@ boolean
 </td></tr>
 <tr><td>
 
-[isDisabled](./isdisabled)
+[handleToggle](./handletoggle)
 
 
 </td><td>
@@ -159,7 +108,7 @@ boolean
 
 </td><td>
 
-boolean
+() =&gt; void
 
 
 </td><td>
@@ -185,7 +134,7 @@ boolean
 </td></tr>
 <tr><td>
 
-[isIcon](./isicon)
+[isNoAction](./isnoaction)
 
 
 </td><td>
@@ -202,7 +151,7 @@ boolean
 </td></tr>
 <tr><td>
 
-[isNoText](./isnotext)
+[isNoToggle](./isnotoggle)
 
 
 </td><td>
@@ -219,7 +168,7 @@ boolean
 </td></tr>
 <tr><td>
 
-[isPlain](./isplain)
+[isSelected](./isselected)
 
 
 </td><td>
@@ -236,75 +185,7 @@ boolean
 </td></tr>
 <tr><td>
 
-[isPrimary](./isprimary)
-
-
-</td><td>
-
-
-</td><td>
-
-boolean
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[isSecondary](./issecondary)
-
-
-</td><td>
-
-
-</td><td>
-
-boolean
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[plain](./plain)
-
-
-</td><td>
-
-
-</td><td>
-
-"true" \| "false" \| null
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[primary](./primary)
-
-
-</td><td>
-
-
-</td><td>
-
-"true" \| "false" \| null
-
-
-</td><td>
-
-
-</td></tr>
-<tr><td>
-
-[secondary](./secondary)
+[selected](./selected)
 
 
 </td><td>

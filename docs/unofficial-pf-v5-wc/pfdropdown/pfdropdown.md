@@ -32,6 +32,57 @@ Description
 </th></tr></thead>
 <tbody><tr><td>
 
+["custom-icon"](./_custom-icon_)
+
+
+</td><td>
+
+
+</td><td>
+
+string \| null
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+["no-text"](./_no-text_)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[customIconTemplate](./customicontemplate)
+
+
+</td><td>
+
+
+</td><td>
+
+ViewTemplate \| null
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [direction](./direction)
 
 
@@ -67,6 +118,23 @@ Description
 <tr><td>
 
 [isExpanded](./isexpanded)
+
+
+</td><td>
+
+
+</td><td>
+
+boolean
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[isNoText](./isnotext)
 
 
 </td><td>

@@ -23,7 +23,6 @@ import { PfWebComponent } from '../../models/PfWebComponent';
             <div class="pf-v5-c-panel__header" part = "header" >
               <slot name = "header"></slot>
             </div>
-            <hr class="pf-v5-c-divider" part = "divider"/>
           ` : 
           html``
         }
@@ -62,11 +61,6 @@ import { PfWebComponent } from '../../models/PfWebComponent';
     `
   ]
 })
-
-
-
-
-
 export class PfPanel extends PfWebComponent{
   @attr() header: "true" | "false" | null = null;
   @attr() footer: "true" | "false" | null = null;

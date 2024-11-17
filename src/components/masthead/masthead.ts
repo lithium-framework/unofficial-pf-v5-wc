@@ -49,6 +49,15 @@ import { BaseStyle } from '../../css/base';
   styles: [
     css`${ BaseStyle }`,
     css`${String(MastheadStyles)}`,
+    css`
+      .pf-v5-c-masthead__content{
+        display: grid;
+      }
+
+      .pf-v5-c-masthead__content > .pf-v5-l-flex{
+        display: grid;
+      }
+    `
   ],
   shadowOptions: { mode: 'open' }
 })

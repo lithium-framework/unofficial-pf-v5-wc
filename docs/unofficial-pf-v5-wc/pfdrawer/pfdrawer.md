@@ -100,6 +100,61 @@ Description
 </td></tr>
 <tr><td>
 
+[$wrapper](./_wrapper)
+
+
+</td><td>
+
+
+</td><td>
+
+import("@lithium-framework/core").IElementRef&lt;HTMLDivElement&gt;
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[body](./body)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+Element
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[content](./content)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+Element
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [expanded](./expanded)
 
 
@@ -109,6 +164,57 @@ Description
 </td><td>
 
 "true" \| "false" \| null
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[handleExpanded](./handleexpanded)
+
+
+</td><td>
+
+
+</td><td>
+
+() =&gt; void
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[handleInline](./handleinline)
+
+
+</td><td>
+
+
+</td><td>
+
+() =&gt; void
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[handleStatic](./handlestatic)
+
+
+</td><td>
+
+
+</td><td>
+
+() =&gt; void
 
 
 </td><td>
@@ -270,6 +376,44 @@ boolean
 </td></tr>
 <tr><td>
 
+[main](./main)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+Element
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[panel](./panel)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+(Element &amp; { readonly controller: Element; readonly main: Element; }) \| null
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
 [resizable](./resizable)
 
 
@@ -296,6 +440,25 @@ boolean
 </td><td>
 
 "true" \| "false" \| null
+
+
+</td><td>
+
+
+</td></tr>
+<tr><td>
+
+[wrapper](./wrapper)
+
+
+</td><td>
+
+`readonly`
+
+
+</td><td>
+
+HTMLDivElement
 
 
 </td><td>

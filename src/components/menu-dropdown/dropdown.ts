@@ -44,6 +44,10 @@ import { PfWebComponent } from "../../models/PfWebComponent";
       :host{
         display: block;
       }
+
+      li{
+        list-style: none;
+      }
     `
   ]
 })
@@ -118,8 +122,13 @@ export class PfDropDownMenu extends PfWebComponent{
           part = "toggle"
           @mousedown = ${( ) => { dropdown.expanded = String(!dropdown.isExpanded) as any }} 
           ?plain = ${ dropdown.isPlain }
-          ?icon = ${ dropdown.isPlain }>
-            <pf-icons-ellipsis-v slot = "icon" part = "icon" ></pf-icons-ellipsis-v>
+          ?icon = ${ dropdown.isPlain }
+          ?no-text = ${ dropdown.isNoText }>
+            ${
+              dropdown.customIconTemplate ?
+              dropdown.customIconTemplate :
+              html`<pf-icons-ellipsis-v slot = "icon" part = "icon" ></pf-icons-ellipsis-v>`
+            }
             <slot name = "label" ></slot>
           </pf-menu-toggle>
         <div class = "pf-v5-c-dropdown__container" part = "container">
@@ -151,7 +160,7 @@ export class PfDropDownMenu extends PfWebComponent{
 
       .pf-v5-c-dropdown__container{
         height: 0;
-        width: 100%;
+        width: 0;
         overflow: visible;
         display: none;
         order: 1;
@@ -163,6 +172,8 @@ export class PfDropDownMenu extends PfWebComponent{
 
       .pf-v5-c-dropdown__menu{
         padding: 8px;
+        width: max-content;
+        height: max-content;
         margin: 0;
       }
 
@@ -180,8 +191,11 @@ export class PfDropDownMenu extends PfWebComponent{
 })
 export class PfDropDown extends PfWebComponent{
 
+  @attr({ mode : "reflect" }) 'custom-icon' : string | null = null;
+
   @attr() expanded : "true" | "false" | null = null;
   @attr() plain : "true" | "false" | null = null;
+  @attr() "no-text" = false;
 
   @state() isExpanded = false;
   @state() isPlain = false;
@@ -191,11 +205,17 @@ export class PfDropDown extends PfWebComponent{
   @state() minWidth : string = "";
   @state() position : 'right' | 'left' | 'center' | 'start' | 'end' = "center";
   @state() width : string = "";
+  @state() isNoText : boolean = false;
+
+  @state() customIconTemplate : ViewTemplate | null = null;
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
 
     if( name == "expanded" )this.isExpanded = this.handleBooleanAttribute( name , newValue );
     if( name == "plain" )this.isPlain = this.handleBooleanAttribute( name , newValue );
+    if( name == "no-text" )this.isNoText = this.handleBooleanAttribute( name , newValue );
+
+    if( name == "custom-icon" )this.customIconTemplate = this.handleBooleanAttribute( name , newValue ) && newValue ? html`<${newValue} slot = "icon" part = "icon"></${newValue}>` : null;
     
     super.attributeChangedCallback( name , oldValue , newValue );
   }

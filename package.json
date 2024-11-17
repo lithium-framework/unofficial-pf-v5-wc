@@ -13,12 +13,10 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@lithium-framework/core": "file:../../Lithium/core",
-    "@patternfly/react-core": "^5.4.0",
-    "@patternfly/react-styles": "^5.4.0"
-  },
   "devDependencies": {
+    "@lithium-framework/core": "1.8.5-1",
+    "@patternfly/react-core": "^5.4.0",
+    "@patternfly/react-styles": "^5.4.0",
     "@microsoft/api-documenter": "^7.25.14",
     "@microsoft/api-extractor": "^7.47.9",
     "css-loader": "^7.1.2",

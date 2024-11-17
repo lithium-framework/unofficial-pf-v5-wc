@@ -31,14 +31,13 @@ import { PfWebComponent } from "../../models/PfWebComponent";
         </span>` :
         html``
       }
-      <span class="pf-v5-c-menu-toggle__text" part = "text" >
-        <slot
-          onSlotChange=${ menuToggle.cretateOnSlotChangeHandler( null , ( node ) => {
-            if( node )menuToggle.isText = true;
-            else menuToggle.isText = false;
-          } ) }
-        ></slot>
-      </span>
+      ${
+        !menuToggle.isNoText ?
+        html`<span class="pf-v5-c-menu-toggle__text" part = "text" >
+          <slot></slot>
+        </span>` :
+        html``
+      }
       ${
         menuToggle.badge ?
         html `<span class="pf-v5-c-menu-toggle__count" part = "badge" >
@@ -54,21 +53,13 @@ import { PfWebComponent } from "../../models/PfWebComponent";
         html``
       }
       ${
-        menuToggle.isPlain ?
-        menuToggle.isText ?
+        !menuToggle.isPlain && !menuToggle.isNoText ?
         html`<span class="pf-v5-c-menu-toggle__controls" part = "controller" >
           <span class="pf-v5-c-menu-toggle__toggle-icon">
             <pf-icons-caret-down part = "icon" ></pf-icons-caret-down>
           </span>
         </span>`:
-        html`<span class="pf-v5-c-menu-toggle__controls" part = "controller">
-          <span class="pf-v5-c-menu-toggle__toggle-icon" part = "toggle" ></span>
-        </span>` :
-        html`<span class="pf-v5-c-menu-toggle__controls" part = "controller">
-          <span class="pf-v5-c-menu-toggle__toggle-icon"  part = "toggle" >
-            <pf-icons-caret-down part = "icon" ></pf-icons-caret-down>
-          </span>
-        </span>`
+        html``
       }
     </button>`
 
@@ -105,12 +96,13 @@ export class PfMenuToggle extends PfWebComponent{
   @attr() primary : "true" | "false" | null = null;
   @attr() secondary : "true" | "false" | null = null;
   @attr() plain : "true" | "false" | null = null;
+  @attr() "no-text" : "true" | "false" | null = null;
 
   @state() isBadge : boolean = false;
   @state() isIcon : boolean = false;
   @state() isExpanded : boolean = false;
   @state() isDisabled : boolean = false;
-  @state() isText : boolean = false;
+  @state() isNoText : boolean = false;
 
   @state() isPrimary = false;
   @state() isSecondary = false;
@@ -119,6 +111,8 @@ export class PfMenuToggle extends PfWebComponent{
   $_controller = createRef< HTMLButtonElement >();
 
   attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
+
+    if( name == "no-text" )this.isNoText = this.handleBooleanAttribute( name , newValue );
 
     if( name == "badge" )this.isBadge = this.handleBooleanAttribute( name , newValue );
     if( name == "icon" )this.isIcon = this.handleBooleanAttribute( name , newValue );
