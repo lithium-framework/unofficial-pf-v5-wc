@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "out/bundle.js",
+  "types": "out/index.d.ts",
   "scripts": {
     "build": "webpack && npm run build:doc",
     "dev": "webpack --watch",
